@@ -1,8 +1,7 @@
 #{{{1 Configurations.
 # {{{3 Vars.
-WORKSPACE_ROOT=~/Workspace
 # {{{2 Binaries.
-GO=GOPATH=$(WORKSPACE_ROOT)/dotfiles/go go
+GO=GOPATH=$(shell pwd)/go go
 
 # {{{3 Colors.
 RED=\033[0;31m
@@ -16,7 +15,7 @@ INFO_C=${PURPLE}
 # {{{3 Set up.
 .PHONY: default clean fmt
 
-default: fmt prompt_util
+default: clean fmt prompt_util
 
 # {{{2 Projects.
 

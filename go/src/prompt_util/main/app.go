@@ -70,10 +70,24 @@ func getActiveBranch() (string, error) {
 	return "", fmt.Errorf("no active branch found")
 }
 
+func getBranchPendingFiles() ([]string, error) {
+	return execCmd("git", "status", "-s")
+}
+
 func main() {
-	if branch, err := getActiveBranch(); err != nil {
+	branch_name, err := getActiveBranch()
+	if err != nil {
 		os.Exit(3)
+	}
+
+	pending_files, err := getBranchPendingFiles()
+	if err != nil {
+		os.Exit(3)
+	}
+
+	if len(pending_files) > 0 {
+		fmt.Printf("(%s*) ", branch_name)
 	} else {
-		fmt.Printf(" \\[\\033[1;36m\\][ %s ]\\[\\033[0m\\] ", branch)
+		fmt.Printf("(%s) ", branch_name)
 	}
 }
