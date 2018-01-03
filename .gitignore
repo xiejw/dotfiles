@@ -1,4 +1,9 @@
+# Vim
+*.swp
+*.swo
+
 # Binaries for programs and plugins
+bin/
 *.exe
 *.dll
 *.so
