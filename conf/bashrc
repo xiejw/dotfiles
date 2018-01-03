@@ -1,0 +1,7 @@
+# {{{1 PS1
+function prompt_command {
+  export PS1="\n[\[\033[32m\]\w]\[\033[0m\]\n\[\033[1;36m\]\u:\h\[\033[1;33m\] $(${DOTFILES}/bin/prompt_util)-> \[\033[0m\]"
+}
+export PROMPT_COMMAND=prompt_command
+
+# vim: ft=sh
