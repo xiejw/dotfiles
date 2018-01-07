@@ -6,6 +6,7 @@ import (
 	"io"
 	"os"
 	"os/exec"
+	"strings"
 )
 
 // Executes the `cmd` with `args`, and returns the output as list of string.
@@ -74,6 +75,20 @@ func getBranchPendingFiles() ([]string, error) {
 	return execCmd("git", "status", "-s")
 }
 
+func getVimInBackground() (bool, error) {
+	outputs, err := execCmd("ps")
+	if err != nil {
+		return false, err
+	}
+
+	for _, line := range outputs {
+		if strings.Contains(line, "vim") {
+			return true, nil
+		}
+	}
+	return false, nil
+}
+
 func main() {
 	branch_name, err := getActiveBranch()
 	if err != nil {
@@ -85,9 +100,19 @@ func main() {
 		os.Exit(3)
 	}
 
+	vim, err := getVimInBackground()
+	if err != nil {
+		os.Exit(3)
+	}
+
+	vim_in_background := ""
+	if vim {
+		vim_in_background = " --vim--"
+	}
+
 	if len(pending_files) > 0 {
-		fmt.Printf("(%s*) ", branch_name)
+		fmt.Printf("(%s*)%s ", branch_name, vim_in_background)
 	} else {
-		fmt.Printf("(%s) ", branch_name)
+		fmt.Printf("(%s)%s ", branch_name, vim_in_background)
 	}
 }
