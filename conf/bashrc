@@ -1,7 +1,44 @@
-# {{{1 PS1
+# {{{1 System Configurations
+# {{{3 Locale and Color
+export LANG='en_US.UTF-8'
+if [[ -n "$TMUX" ]]; then
+  # tmux + vim do not work well without this setting.
+  export TERM='screen-256color'
+else
+  export TERM='xterm-256color'
+fi
+# {{{3 PS1
 function prompt_command {
   export PS1="\n[\[\033[32m\]\w]\[\033[0m\]\n\[\033[1;36m\]\u:\h\[\033[1;33m\] $(${DOTFILES}/bin/prompt_util)-> \[\033[0m\]"
 }
 export PROMPT_COMMAND=prompt_command
 
-# vim: ft=sh
+# {{{1 Shortcuts.
+# {{{3 Alias.
+alias less='less -i'
+alias rm='rm -i'
+alias mv='mv -i'
+alias cp='cp -i'
+alias ll='ls -lh'
+
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+  alias ls='ls --color'
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  alias ls='ls -G'
+fi
+
+# {{{3 Git.
+alias gs='git status -s'
+alias gm='git commit -am'
+alias gp='git pull --rebase'
+alias gd='git d'
+
+# {{{3 Tmux
+alias tmux="TERM=screen-256color-bce tmux"
+alias tad='tmux attach -t 0'
+alias ta1='tmux attach -t 1'
+
+# {{{3 xieqi.
+alias cdp='ssh xieqi.org'
+
+# vim: ft=sh foldlevel=2 foldenable foldmethod=marker
