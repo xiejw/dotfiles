@@ -6,6 +6,7 @@ import (
 	"io"
 	"os"
 	"os/exec"
+	"runtime"
 	"strings"
 )
 
@@ -13,6 +14,8 @@ import (
 func execCmd(cmd string, args ...string) ([]string, error) {
 	var outputs []string
 	cmdExec := exec.Command(cmd, args...)
+	cmdExec.Stdin = os.Stdin
+
 	stdout, err := cmdExec.StdoutPipe()
 	if err != nil {
 		return outputs, err
@@ -76,7 +79,15 @@ func getBranchPendingFiles() ([]string, error) {
 }
 
 func getVimInBackground() (bool, error) {
-	outputs, err := execCmd("ps")
+	var outputs []string
+	var err error
+
+	if runtime.GOOS == "darwin" {
+		outputs, err = execCmd("ps", "-T")
+	} else {
+		outputs, err = execCmd("ps")
+	}
+
 	if err != nil {
 		return false, err
 	}
