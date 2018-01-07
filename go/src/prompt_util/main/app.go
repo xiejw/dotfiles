@@ -90,16 +90,6 @@ func getVimInBackground() (bool, error) {
 }
 
 func main() {
-	branch_name, err := getActiveBranch()
-	if err != nil {
-		os.Exit(3)
-	}
-
-	pending_files, err := getBranchPendingFiles()
-	if err != nil {
-		os.Exit(3)
-	}
-
 	vim, err := getVimInBackground()
 	if err != nil {
 		os.Exit(3)
@@ -108,6 +98,19 @@ func main() {
 	vim_in_background := ""
 	if vim {
 		vim_in_background = " --vim--"
+	}
+
+	branch_name, err := getActiveBranch()
+	if err != nil {
+		if vim {
+			fmt.Printf("%s ", vim_in_background)
+		}
+		os.Exit(3)
+	}
+
+	pending_files, err := getBranchPendingFiles()
+	if err != nil {
+		os.Exit(3)
 	}
 
 	if len(pending_files) > 0 {
