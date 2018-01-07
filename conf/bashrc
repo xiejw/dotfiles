@@ -34,7 +34,7 @@ alias gp='git pull --rebase'
 alias gd='git d'
 
 # {{{3 Tmux
-alias tmux="TERM=screen-256color-bce tmux"
+alias tmux="TERM=screen-256color-bce tmux -2"
 alias tad='tmux attach -t 0'
 alias ta1='tmux attach -t 1'
 
