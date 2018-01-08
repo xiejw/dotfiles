@@ -2,12 +2,17 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"fmt"
 	"io"
 	"os"
 	"os/exec"
 	"runtime"
 	"strings"
+)
+
+var (
+	flagDebug = flag.Bool("debug", false, "Enable debug logging.")
 )
 
 // Executes the `cmd` with `args`, and returns the output as list of string.
@@ -41,26 +46,15 @@ func execCmd(cmd string, args ...string) ([]string, error) {
 	return outputs, nil
 }
 
-// Fetches `pwd`.
-func getPwd() (string, error) {
-	outputs, err := execCmd("pwd")
-	if err != nil {
-		return "", err
-	} else if len(outputs) == 0 {
-		return "", fmt.Errorf("no output found")
-	} else {
-		return outputs[0], nil
-	}
-}
-
-// Fetches the active branch name (starting with *).
+// Fetches the active branch name (starting with *). If not in git folder.
+// returns "".
 func getActiveBranch() (string, error) {
 	// Fetch all branches.
 	outputs, err := execCmd("git", "branch", "--no-color")
 	if err != nil {
 		return "", err
 	} else if len(outputs) == 0 {
-		return "", fmt.Errorf("no output found")
+		return "", fmt.Errorf("Cannot find any branch")
 	}
 
 	for _, line := range outputs {
@@ -70,8 +64,7 @@ func getActiveBranch() (string, error) {
 		}
 	}
 
-	// should not reach here
-	return "", fmt.Errorf("no active branch found")
+	return "", fmt.Errorf("Cannot find active branch")
 }
 
 func getBranchPendingFiles() ([]string, error) {
@@ -100,33 +93,59 @@ func getVimInBackground() (bool, error) {
 	return false, nil
 }
 
-func main() {
-	vim, err := getVimInBackground()
-	if err != nil {
-		os.Exit(3)
+type Status struct {
+	HasVimInBg    bool
+	GitMasterName string // "" means not inside git folder.
+	GitLocalChane bool
+}
+
+// Should print right " ".
+func printPromot(status Status) {
+	vim_info := ""
+	if status.HasVimInBg {
+		vim_info = "--vim-- "
 	}
 
-	vim_in_background := ""
-	if vim {
-		vim_in_background = " --vim--"
+	git_info := ""
+	if status.GitMasterName != "" {
+		status_symbol := ""
+		if status.GitLocalChane {
+			status_symbol = "*"
+		}
+		git_info = fmt.Sprintf(
+			"(%s%s) ", status.GitMasterName, status_symbol)
 	}
+
+	fmt.Printf("%s%s", git_info, vim_info)
+}
+
+func handleUnexpectedError(err error) {
+	if *flagDebug && err != nil {
+		fmt.Printf("E %v\n", err)
+	}
+}
+
+func main() {
+	flag.Parse()
+
+	vim, err := getVimInBackground()
+	handleUnexpectedError(err)
 
 	branch_name, err := getActiveBranch()
-	if err != nil {
-		if vim {
-			fmt.Printf("%s ", vim_in_background)
-		}
-		os.Exit(3)
+	handleUnexpectedError(err)
+
+	has_pending_files := false
+	if branch_name != "" {
+		pending_files, err := getBranchPendingFiles()
+		handleUnexpectedError(err)
+		has_pending_files = len(pending_files) > 0
 	}
 
-	pending_files, err := getBranchPendingFiles()
-	if err != nil {
-		os.Exit(3)
+	status := Status{
+		HasVimInBg:    vim,
+		GitMasterName: branch_name,
+		GitLocalChane: has_pending_files,
 	}
 
-	if len(pending_files) > 0 {
-		fmt.Printf("(%s*)%s ", branch_name, vim_in_background)
-	} else {
-		fmt.Printf("(%s)%s ", branch_name, vim_in_background)
-	}
+	printPromot(status)
 }
