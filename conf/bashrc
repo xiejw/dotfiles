@@ -13,6 +13,10 @@ function prompt_command {
 }
 export PROMPT_COMMAND=prompt_command
 
+# {{{3 Keyboard
+# This disable the cap lock.
+xmodmap -e "keycode 66 = Shift_L NoSymbol Shift_L"
+
 # {{{1 Shortcuts.
 # {{{3 Alias.
 alias less='less -i'
@@ -20,6 +24,7 @@ alias rm='rm -i'
 alias mv='mv -i'
 alias cp='cp -i'
 alias ll='ls -lh'
+alias vv='vim -c ":call fns#LoadPendingFiles()"'
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   alias ls='ls --color'
@@ -42,3 +47,4 @@ alias ta1='tmux attach -t 1 -d'
 alias cdp='ssh xieqi.org'
 
 # vim: ft=sh foldlevel=2 foldenable foldmethod=marker
+
