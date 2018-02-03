@@ -15,7 +15,9 @@ export PROMPT_COMMAND=prompt_command
 
 # {{{3 Keyboard
 # This disable the cap lock.
-xmodmap -e "keycode 66 = Shift_L NoSymbol Shift_L"
+if [ -n "${DISPLAY+x}" ]; then
+  xmodmap -e "keycode 66 = Shift_L NoSymbol Shift_L"
+fi
 
 # {{{1 Shortcuts.
 # {{{3 Alias.
