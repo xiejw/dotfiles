@@ -43,6 +43,7 @@ alias gs='git status -s'
 alias gm='git commit -am'
 alias gp='git pull --rebase'
 alias gd='git d'
+alias gg='git log --graph --oneline --all'
 
 # {{{3 Tmux
 alias tmux="TERM=screen-256color-bce tmux -2"
