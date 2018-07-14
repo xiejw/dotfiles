@@ -1,3 +1,5 @@
+# vim: ft=sh:foldlevel=2:foldenable:foldmethod=marker
+
 # {{{1 System Configurations
 # {{{3 Locale and Color
 export LANG='en_US.UTF-8'
@@ -22,6 +24,13 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     xmodmap -e "keycode 66 = Shift_L NoSymbol Shift_L"
   fi
 fi
+
+# {{{3 PATH
+# All Golang third_party libraries are install in /opt/go
+export PATH=$PATH:/opt/go/bin
+
+# {{{3 Brew bash completion for Mac OS.
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
 # {{{1 Shortcuts.
 # {{{3 Alias.
@@ -53,5 +62,4 @@ alias ta1='tmux attach -t 1 -d'
 # {{{3 xieqi.
 alias cdp='ssh xieqi.org'
 
-# vim: ft=sh foldlevel=2 foldenable foldmethod=marker
 
