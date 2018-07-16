@@ -29,4 +29,5 @@ Installed libraries:
 
 Dependencies:
 
-    brew install ctags graphviz
+    [macOS] brew install ctags graphviz
+    [ubuntu] sudo apt-get install exuberant-ctags graphviz
