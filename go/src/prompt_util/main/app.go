@@ -94,7 +94,24 @@ func getVimInBackground() (bool, error) {
 }
 
 func getVirtualEnvName() string {
-	return os.Getenv("VIRTUAL_ENV")
+	name := os.Getenv("VIRTUAL_ENV")
+	if name == "" {
+		return name
+	}
+
+	// Convert /path/to/env as /p/t/env for short format.
+	s := strings.Split(name, "/")
+	output := make([]string, 0, len(s))
+	final := len(s) - 1
+	for i, part := range s {
+		switch {
+		case len(part) == 0 || i == final:
+			output = append(output, part)
+		default:
+			output = append(output, string(part[0]))
+		}
+	}
+	return strings.Join(output, "/")
 }
 
 type Status struct {
@@ -124,7 +141,7 @@ func printPromot(status Status) {
 	virtual_env_info := ""
 	if status.VirtualEnv != "" {
 		virtual_env_info = fmt.Sprintf(
-			"[virtural:%s] ", status.VirtualEnv)
+			"[py:%s] ", status.VirtualEnv)
 	}
 
 	fmt.Printf("%s%s%s", git_info, vim_info, virtual_env_info)
