@@ -93,10 +93,15 @@ func getVimInBackground() (bool, error) {
 	return false, nil
 }
 
+func getVirtualEnvName() string {
+	return os.Getenv("VIRTUAL_ENV")
+}
+
 type Status struct {
 	HasVimInBg    bool
 	GitMasterName string // "" means not inside git folder.
 	GitLocalChane bool
+	VirtualEnv    string // "" means "no"
 }
 
 // Should print right " ".
@@ -116,7 +121,13 @@ func printPromot(status Status) {
 			"(%s%s) ", status.GitMasterName, status_symbol)
 	}
 
-	fmt.Printf("%s%s", git_info, vim_info)
+	virtual_env_info := ""
+	if status.VirtualEnv != "" {
+		virtual_env_info = fmt.Sprintf(
+			"[virtural:%s] ", status.VirtualEnv)
+	}
+
+	fmt.Printf("%s%s%s", git_info, vim_info, virtual_env_info)
 }
 
 func handleUnexpectedError(err error) {
@@ -134,6 +145,8 @@ func main() {
 	branch_name, err := getActiveBranch()
 	handleUnexpectedError(err)
 
+	virtual_env_name := getVirtualEnvName()
+
 	has_pending_files := false
 	if branch_name != "" {
 		pending_files, err := getBranchPendingFiles()
@@ -145,6 +158,7 @@ func main() {
 		HasVimInBg:    vim,
 		GitMasterName: branch_name,
 		GitLocalChane: has_pending_files,
+		VirtualEnv:    virtual_env_name,
 	}
 
 	printPromot(status)
