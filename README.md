@@ -45,12 +45,10 @@ Shortcuts (see https://gist.github.com/andreyvit/2921703 as reference):
 | `ctrl-o !`        | move the current pane into a new separate window     |
 | ------------------| -----------------------------------------------------|
 | `ctrl-o <space>`  | switch to the next layout                            |
-| `ctrl-o :resize-pane -[LRDU] <size>`  | Resize the pane left, right, down, up
-with <size> lines.  |
+| `ctrl-o :resize-pane -[LRDU] <size>`  | Resize the pane left, right, down, up with `size` lines. |
 | `ctrl-o z`        | Toggle: zoom (max)/unzoom (restore) the current pane |
 | `ctrl-o x`        | kill the current pane                                |
-| `ctrl-o q`        | display pane numbers for a short while (if you type the
-number, move cursor there              |
+| `ctrl-o q`        | display pane numbers for a short while (if you type the number, move cursor there. |
 | ------------------| -----------------------------------------------------|
 
 (Note the `tmux.conf` in this repro uses `ctrl-o` as leader)
