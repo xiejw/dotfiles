@@ -16,6 +16,12 @@ Link the file:
 
 See [here](tmux_cheatsheet.md) for cheatsheet.
 
+## Xmonad
+
+See [manpage](https://xmonad.org/manpage.html) for default key bindings.
+
+See [here](xmonad_cheatsheet.md) for layout cheatsheet.
+
 ## Golang `third_party` Libraries and Binaries
 
 All Golang `third_party` libraries and binaries are installed in `/opt/go`.
