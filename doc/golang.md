@@ -2,8 +2,10 @@
 
 ## Install
 
-Go [official site](golang.org) to download. It is recommended not to use Linux
-distro package to install.
+Go [official site](http://golang.org) to download. It is recommended not to use
+Linux distro package to install. Typically, the install can be done via:
+
+    sudo tar -C /usr/local -xzf go$VERSION.$OS-$ARCH.tar.gz
 
 ## Golang `third_party` Libraries and Binaries
 
