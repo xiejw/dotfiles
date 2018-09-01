@@ -11,9 +11,19 @@ else
 fi
 # {{{3 PS1
 function prompt_command {
-  export PS1="\n[\[\033[32m\]\w]\[\033[0m\]\n\[\033[1;36m\]\u:\h\[\033[1;33m\] $(${DOTFILES}/bin/prompt_util)-> \[\033[0m\]"
+  export PS1="\n[\[\033[1;32m\]\w]\[\033[0m\]\n\[\033[1;36m\]\u:\h\[\033[1;33m\] $(${DOTFILES}/bin/prompt_util)-> \[\033[0m\]"
 }
-export PROMPT_COMMAND=prompt_command
+function prompt_command_for_gentoo {
+  # Bold green (1;32) for username and hostname.
+  # Bold blue (1;34) for path.
+  export PS1="\n[\[\033[1;34m\]\w]\[\033[0m\]\n\[\033[1;32m\]\u:\h\[\033[1;33m\] $(${DOTFILES}/bin/prompt_util)-> \[\033[0m\]"
+}
+
+if [ "$HOSTNAME" = "mygentoo" ]; then
+  export PROMPT_COMMAND=prompt_command_for_gentoo
+else
+  export PROMPT_COMMAND=prompt_command
+fi
 export EDITOR=vim
 
 # {{{3 Keyboard
@@ -26,6 +36,8 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 fi
 
 # {{{3 PATH
+# Customized installed go place.
+export PATH=$PATH:/usr/local/go/bin
 # All Golang third_party libraries are install in /opt/go
 export PATH=$PATH:/opt/go/bin
 
@@ -63,8 +75,4 @@ alias gg='git log --graph --oneline --all'
 alias tmux="TERM=screen-256color-bce tmux -2"
 alias tad='tmux attach -t 0 -d'
 alias ta1='tmux attach -t 1 -d'
-
-# {{{3 xieqi.
-alias cdp='ssh xieqi.org'
-
 
