@@ -1,8 +1,13 @@
 # Install Configuration Files
 
+## Install Golang
+
+See [golang](doc/golang.md) doc for golang installation.
+
 ## Bashrc
 
-Append the following block at the end of ~/.bashrc
+Append the following block at the end of `~/.bashrc`, `~/.bash_profile`, or
+`~/.profile`.
 
     # Customized
     export DOTFILES=~/Workspace/dotfiles
@@ -14,33 +19,14 @@ Link the file:
 
     ln -sf ~/Workspace/dotfiles/conf/tmux.conf ~/.tmux.conf
 
-See [here](tmux_cheatsheet.md) for cheatsheet.
+See [here](doc/tmux_cheatsheet.md) for cheatsheet.
 
-## Xmonad
+# Other Configuration Files
 
-See [manpage](https://xmonad.org/manpage.html) for default key bindings.
+- Xmonad (Linux Workstation)
+  - See [manpage](https://xmonad.org/manpage.html) for default key bindings.
+  - See [here](doc/xmonad_cheatsheet.md) for layout cheatsheet.
 
-See [here](xmonad_cheatsheet.md) for layout cheatsheet.
+- Gentoo
+  - See [here](doc/gentoo.md) for Gentoo related configuration files.
 
-
-## Golang `third_party` Libraries and Binaries
-
-All Golang `third_party` libraries and binaries are installed in `/opt/go`.
-
-Create folder:
-
-    sudo mkdir -p /opt/go; sudo chrown $(whoami) /opt/go;
-
-Installed libraries:
-
-    GOPATH=/opt/go go get -u github.com/jstemmer/gotags
-    GOPATH=/opt/go go get -u github.com/yqylovy/goimportdot
-
-Dependencies:
-
-    [macOS] brew install ctags graphviz
-    [ubuntu] sudo apt-get install exuberant-ctags graphviz
-
-# Gentoo
-
-See [here](gentoo.md) for Gentoo related configuration files.
