@@ -22,6 +22,7 @@ See [manpage](https://xmonad.org/manpage.html) for default key bindings.
 
 See [here](xmonad_cheatsheet.md) for layout cheatsheet.
 
+
 ## Golang `third_party` Libraries and Binaries
 
 All Golang `third_party` libraries and binaries are installed in `/opt/go`.
@@ -39,3 +40,7 @@ Dependencies:
 
     [macOS] brew install ctags graphviz
     [ubuntu] sudo apt-get install exuberant-ctags graphviz
+
+# Gentoo
+
+See [here](gentoo.md) for Gentoo related configuration files.
