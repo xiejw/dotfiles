@@ -21,9 +21,20 @@ Link the file:
 
 See [here](doc/tmux_cheatsheet.md) for cheatsheet.
 
-# Other Configuration Files
+## Xmonad (Linux Workstation)
 
-- Xmonad (Linux Workstation)
-  - See [manpage](https://xmonad.org/manpage.html) for default key bindings.
-  - See [here](doc/xmonad_cheatsheet.md) for layout cheatsheet.
+- See [manpage](https://xmonad.org/manpage.html) for default key bindings.
+- See [here](doc/xmonad_cheatsheet.md) for layout cheatsheet.
+- Link config file
+
+        ln -sf ~/Workspace/dotfiles/conf/termite_config ~/.config/termite/config
+
+## Termite
+
+[Termite](https://github.com/thestinger/termite) needs special config file:
+
+    ln -sf ~/Workspace/dotfiles/conf/termite_config ~/.config/termite/config
+
+Install [powerline fonts](https://github.com/powerline/fonts) for vim +
+powerline.
 
