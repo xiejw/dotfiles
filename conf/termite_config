@@ -1,5 +1,5 @@
 [options]
-font = DejaVu Sans Mono for Powerline 14px
+font = Inconsolata for Powerline 12px
 browser = /opt/firefox/firefox
 
 [colors]

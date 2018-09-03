@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Enable VirtualBox client support, e.g., clipboard.
+. /etc/X11/Xsession.d/98vboxadd-xclient
+
+xrdb -merge ~/.Xresources
+xrandr --output VGA-1 --mode 2560x1600 --dpi 196
+
+export GDK_SCALE=2
+export GDK_DPI_SCALE=0.5
+
+exec /usr/bin/xmonad
