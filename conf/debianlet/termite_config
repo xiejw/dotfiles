@@ -1,5 +1,5 @@
 [options]
-font = Inconsolata for Powerline 12px
+font = Menlo for Powerline 10px
 browser = /opt/firefox/firefox
 
 [colors]
