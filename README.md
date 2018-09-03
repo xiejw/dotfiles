@@ -38,3 +38,8 @@ See [here](doc/tmux_cheatsheet.md) for cheatsheet.
 Install [powerline fonts](https://github.com/powerline/fonts) for vim +
 powerline.
 
+
+## X11
+
+    ln -sf ~/Workspace/dotfiles/conf/xinitrc ~/.xinitrc
+    ln -sf ~/Workspace/dotfiles/conf/Xresources ~/.Xresources
