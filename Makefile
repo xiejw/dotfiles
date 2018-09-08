@@ -12,6 +12,11 @@ default: clean fmt prompt_util
 prompt_util:
 	$(GO) build -o bin/$@ prompt_util/main
 
+# {{{2 Sync configurations.
+
+sync_gentoolet:
+	./conf/gentoolet/sync.sh
+
 # {{{2 Maintenance.
 fmt:
 	gofmt -w -l src
