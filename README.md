@@ -27,9 +27,6 @@ See [here](doc/tmux_cheatsheet.md) for cheatsheet.
 
 - See [manpage](https://xmonad.org/manpage.html) for default key bindings.
 - See [here](doc/xmonad_cheatsheet.md) for layout cheatsheet.
-- Link config file
-
-        ln -sf ~/Workspace/dotfiles/conf/$HOSTNAME/termite_config ~/.config/termite/config
 
 ## Termite
 
