@@ -1,15 +1,48 @@
 # Gentoo
 
-## Pre-Install
+## Portage Cheatsheet
 
-### Pre Pre-Install on VirtualBox
+    # Update
+    emerge --sync
+    [etc-update]
+    [emerge --oneshot portage]
+    emerge --update --deep --with-bdeps=y --newuse @world
+    emerge -av --depclean
+    revdep-rebuild -v
+
+    # Check USE flags
+    emerge -pv @world
+    emerge -pv <package_name>
+
+
+    # Check system info
+    emerge --info
+
+    # Install and uninstall
+    emerge --ask <package>    # See USE and dep first.
+    emerge -a unmerge <package>
+
+    # Search
+    emerge search pdf
+
+    # Check package files
+    equery files <package>
+
+    # Find which (installed) package a file belongs to
+    equery b <file>
+
+## Install
+
+### Pre-Install
+
+#### Pre Pre-Install on VirtualBox
 
 It is useful to ssh into the machine during install stage. So, before start the
 new VM with install ISO file, ensure that the `host-only adapter` is configured
 properly in your VM's network setting.
 
 
-### The Real Pre install
+#### The Real Pre install
 
 Set up the sshd before install. It is much easier to do installation in another
 machine with copy-paste.
@@ -22,7 +55,7 @@ correct `USE` and `FEATURES` before install anything:
     USE="-doc -examples -emacs -debug"
     FEATURES="nodoc noman noinfo"
 
-## Install
+### Install
 
 Compile Kernel
 
@@ -31,9 +64,18 @@ Compile Kernel
     sudo make install
 
 
-## Post install
+### Post install
 
-### Some Simple Twists
+#### Time Zone
+
+        cp /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
+
+#### Add User
+
+        useradd -m -G users,wheel,audio -s /bin/bash <user_name>
+        passwd <user_name>
+
+#### Some Simple Twists
 
 First, clean the domain name in loggin screen. Simply, delete the `.\O` in
 `/etc/issue` file.
@@ -42,13 +84,17 @@ Then, add sudo:
 
     uncomment %sudo in /etc/sudoers
     groupadd sudo
-    usermod -a -G sudo xiejw
+    usermod -a -G sudo <user_name>
 
-Install utilities:
+#### Install utilities:
 
-  sudo emerge -a vim dev-vcs/git app-portage/gentoolkit tux bash-completion
+Install necessary tools:
 
-### Set up Time in VirtualBox
+    emerge sudo vim dev-vcs/git app-portage/gentoolkit tux bash-completion
+    EDITOR=vim git config --global -e
+    ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+
+#### Set up Time in VirtualBox
 
 The gentoo in VirtualBox might have time shift. For example, when the laptop
 wakes up from sleep, the time is wrong. To fix that automatically, first,
@@ -66,10 +112,17 @@ https://wiki.gentoo.org/wiki/System_time.
 
 ## Other Stuff
 
+### OpenRC `init`
+
+See [OpenRC](https://wiki.gentoo.org/wiki/OpenRC) for documentation.
+
+    rc-update add sshd default
+    rc-update del sshd default
+    rc-update -v show          # -v lists all, not just enabled
+
 ### For syslog-ng
 `/etc/syslog-ng/syslog-ng.conf` is the configuration file. By default, `tty12`
 and `/var/log/messages` are the default output targets.
 
 ### For portage
 `/var/log/emerge.log` shows the high-level status.
-
