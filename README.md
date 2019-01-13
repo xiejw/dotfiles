@@ -28,19 +28,3 @@ See [here](doc/tmux_cheatsheet.md) for cheatsheet.
 - See [manpage](https://xmonad.org/manpage.html) for default key bindings.
 - See [here](doc/xmonad_cheatsheet.md) for layout cheatsheet.
 
-## Termite
-
-[Termite](https://github.com/thestinger/termite) needs special config file:
-
-    ln -sf ~/Workspace/dotfiles/conf/$HOSTNAME/termite_config ~/.config/termite/config
-
-Install powerline fonts for vim. For example,
-
-- https://github.com/powerline/fonts
-- https://github.com/abertsch/Menlo-for-Powerline
-
-
-## Other X11 Related Files.
-
-    ln -sf ~/Workspace/dotfiles/conf/$HOSTNAME/xinitrc ~/.xinitrc
-    ln -sf ~/Workspace/dotfiles/conf/$HOSTNAME/Xresources ~/.Xresources
