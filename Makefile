@@ -1,16 +1,13 @@
 # vim: foldenable foldmethod=marker foldlevel=1
 
-#{{{1 Configurations.
-GO=GOPATH=$(shell pwd) go
+default: clean fmt prompt_util
 
 # {{{1 Actions.
-# {{{2 Set up.
-default: clean fmt prompt_util
 
 # {{{2 Projects.
 
 prompt_util:
-	$(GO) build -o bin/$@ prompt_util/main
+	go build -o bin/$@ cmd/prompt_util/main.go
 
 # {{{2 Sync configurations.
 
@@ -19,7 +16,7 @@ sync_gentoolet:
 
 # {{{2 Maintenance.
 fmt:
-	gofmt -w -l src
+	gofmt -w -l cmd
 
 clean:
 	rm -f bin/*
