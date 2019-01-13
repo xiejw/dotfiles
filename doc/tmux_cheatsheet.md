@@ -3,6 +3,14 @@
 Note the `tmux.conf` in this repro uses `ctrl-o` as prefix.  Shortcuts (see
 https://gist.github.com/andreyvit/2921703 as reference):
 
+bind : exec
+v
+s
+r
+o
+
+copy mode search and cop-paste.
+
 | Key               | Comment                                              |
 | ------------------| -----------------------------------------------------|
 | `ctrl-o c`        | Creates a new window                                 |
