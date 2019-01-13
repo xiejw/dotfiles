@@ -3,12 +3,11 @@
 Note the `tmux.conf` in this repro uses `ctrl-o` as `PREFIX`.  Shortcuts (see
 https://gist.github.com/andreyvit/2921703 as reference):
 
-copy mode search and cop-paste.
-
 |                 | Key               | Comment                                                      |
 | --------------- | ------------------| ------------------------------------------------------------ |
 | Special         | `PREFIX r`        | Reload config file `tmux.conf`.                              |
 |                 | `PREFIX :`        | Execute a tmux command line.                                 |
+|                 | `PREFIX t`        | Display a clock.                                             |
 | Window          | `PREFIX c`        | Creates a new window                                         |
 |                 | `PREFIX 1 ...`    | Switch to window 1. ... 9                                    |
 |                 | `PREFIX p`        | previous window                                              |
@@ -37,3 +36,37 @@ copy mode search and cop-paste.
 |                 | `PREFIX x`        | kill the current pane                                        |
 |                 | `PREFIX q`        | display pane numbers for a short while (if you type the number, move cursor there). |
 
+# Copy Mode
+
+Press `PREFIX [` enters _Copy Mode_. After quitting, press `PREFIX ]` to paste
+the selection.
+
+    Function                vi
+    Back to indentation     ^
+    Clear selection         Escape
+    Copy selection          Enter
+    Cursor down             j
+    Cursor left             h
+    Cursor right            l
+    Cursor to bottom line   L
+    Cursor to middle line   M
+    Cursor to top line      H
+    Cursor up               k
+    Delete entire line      d
+    Delete to end of line   D
+    End of line             $
+    Goto line               :
+    Half page down          C-d
+    Half page up            C-u
+    Next page               C-f
+    Next word               w
+    Paste buffer            p
+    Previous page           C-b
+    Previous word           b
+    Quit mode               q
+    Scroll down             C-Down or J
+    Scroll up               C-Up or K
+    Search again            n
+    Search backward         ?
+    Search forward          /
+    Start of line           0
