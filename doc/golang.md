@@ -17,7 +17,6 @@ Create folder:
 
 Installed libraries:
 
-    GOPATH=/opt/go go get -u github.com/jstemmer/gotags
     GOPATH=/opt/go go get -u github.com/yqylovy/goimportdot
 
 Dependencies:
