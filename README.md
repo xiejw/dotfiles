@@ -5,8 +5,8 @@
 - Golang: See [golang](doc/golang.md) doc for golang installation.
 - Compile:
 
-    cd ~/Workspace/dotfiles
-    make
+        cd ~/Workspace/dotfiles
+        make
 
 - Other dependencies:
 
