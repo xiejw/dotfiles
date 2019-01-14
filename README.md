@@ -1,8 +1,17 @@
 # Install Configuration Files
 
-## Install Golang
+## Install
 
-See [golang](doc/golang.md) doc for golang installation.
+- Golang: See [golang](doc/golang.md) doc for golang installation.
+- Compile:
+
+    cd ~/Workspace/dotfiles
+    make
+
+- Other dependencies:
+
+        [macOS] brew install ctags urlview
+        [ubuntu] sudo apt-get install exuberant-ctags urlview
 
 ## Bashrc
 
