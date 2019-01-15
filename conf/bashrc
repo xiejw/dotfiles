@@ -35,12 +35,6 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   fi
 fi
 
-# {{{3 PATH
-# Customized installed go place.
-export PATH=$PATH:/usr/local/go/bin
-# All Golang third_party libraries are install in /opt/go
-export PATH=$PATH:/opt/go/bin
-
 # Append Qt if existed. This is installed by brew for MacOS.
 if [ -f /usr/local/opt/qt/bin/qmake ]; then
   export PATH="/usr/local/opt/qt/bin:$PATH"
@@ -48,6 +42,13 @@ fi
 
 # {{{3 Brew bash completion for Mac OS.
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+
+# {{{1 Golang Related.
+export GOPATH=~/.go_mod_cache  # At Go 1.11, GOPATH is used for mod cache.
+# Customized installed go place.
+export PATH=$PATH:/usr/local/go/bin
+# All Golang third_party libraries are install in /opt/go
+export PATH=$PATH:/opt/go/bin
 
 # {{{1 Shortcuts.
 # {{{3 Alias.
