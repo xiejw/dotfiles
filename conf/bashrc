@@ -51,7 +51,7 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:/opt/go/bin
 
 # {{{1 Shortcuts.
-# {{{3 Alias.
+# {{{2 Alias.
 alias less='less -i'
 alias rm='rm -i'
 alias mv='mv -i'
@@ -65,15 +65,18 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   alias ls='ls -G'
 fi
 
-# {{{3 Git.
+# {{{2 Git.
 alias gs='git status -s'
 alias gm='git commit -am'
 alias gp='git pull --rebase'
 alias gd='git d'
 alias gg='git log --graph --oneline --all'
 
-# {{{3 Tmux
+# {{{2 Tmux.
 alias tmux="TERM=screen-256color-bce tmux -2"
 alias tad='tmux attach -t 0 -d'
 alias ta1='tmux attach -t 1 -d'
+
+# {{{2 Docker.
+alias d='docker'
 
