@@ -66,6 +66,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 # {{{2 Git.
+alias g='git'
 alias gs='git status -s'
 alias gm='git commit -am'
 alias gp='git pull --rebase'
