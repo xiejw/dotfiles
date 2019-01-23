@@ -36,6 +36,17 @@ https://gist.github.com/andreyvit/2921703 as reference):
 |                 | `PREFIX x`        | kill the current pane                                        |
 |                 | `PREFIX q`        | display pane numbers for a short while (if you type the number, move cursor there). |
 
+# Session
+
+    Function               Key/CMD
+    New                    tmux new -s <session_name>
+    List                   tmux ls
+    Attach                 tmux attach -t <session_name>
+    Rename                 [tmux] PREFIX $
+    Detach                 [tmux] PREFIX d
+    Detach others          [tmux] PREFIX D
+    Switch                 [tmux] :choose-tree
+
 # Copy Mode
 
 Press `PREFIX [` enters _Copy Mode_. After quitting, press `PREFIX ]` to paste
