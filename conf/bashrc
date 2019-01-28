@@ -50,6 +50,9 @@ export PATH=$PATH:/usr/local/go/bin
 # All Golang third_party libraries are install in /opt/go
 export PATH=$PATH:/opt/go/bin
 
+# {{{1 Swift.
+export PATH=$PATH:/opt/swift/bin
+
 # {{{1 Shortcuts.
 # {{{2 Alias.
 alias less='less -i'
