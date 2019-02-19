@@ -1,8 +1,8 @@
-# Install
+# Install from Source Code
 
-Most Debian distributions, e.g., stretch, contain very stable tmux, which does
-not support the configuraiton file in this repo. So, compile it from source is
-one solution.
+Most Debian distributions, e.g., stretch, contain very old `tmux`, which does not
+support the configuration file in this repo. So, compile it from source is one
+solution.
 
 
     git clone https://github.com/tmux/tmux.git

@@ -2,7 +2,7 @@
 
 ## Install
 
-- Golang: See [golang](doc/golang.md) doc for golang installation.
+- Golang: See [golang](doc/golang.md#install) doc for golang installation.
 - Compile:
 
         cd ~/Workspace/dotfiles
