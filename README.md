@@ -28,7 +28,8 @@ Link the file:
 
     ln -sf ~/Workspace/dotfiles/conf/tmux.conf ~/.tmux.conf
 
-See [here](doc/tmux_cheatsheet.md) for cheatsheet.
+- See [here](doc/tmux.md#tmux-cheatsheet) for cheatsheet.
+- See [here](doc/tmux.md#install) for installing from source code.
 
 ## Xorg (Linux Workstation)
 

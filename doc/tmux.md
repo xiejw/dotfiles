@@ -1,4 +1,20 @@
+# Install
+
+Most Debian distributions, e.g., stretch, contain very stable tmux, which does
+not support the configuraiton file in this repo. So, compile it from source is
+one solution.
+
+
+    git clone https://github.com/tmux/tmux.git
+    sudo apt install automake pkg-config libevent-dev libncurses-dev
+    sh autogen.sh
+    ./configure
+    make
+    sudo make install
+
 # Tmux Cheatsheet
+
+## General
 
 Note the `tmux.conf` in this repro uses `ctrl-o` as `PREFIX`.  Shortcuts (see
 https://gist.github.com/andreyvit/2921703 as reference):
@@ -36,7 +52,7 @@ https://gist.github.com/andreyvit/2921703 as reference):
 |                 | `PREFIX x`        | kill the current pane                                        |
 |                 | `PREFIX q`        | display pane numbers for a short while (if you type the number, move cursor there). |
 
-# Session
+## Session
 
     Function               Key/CMD
     New                    tmux new -s <session_name>
@@ -47,7 +63,7 @@ https://gist.github.com/andreyvit/2921703 as reference):
     Detach others          [tmux] PREFIX D
     Switch                 [tmux] :choose-tree
 
-# Copy Mode
+## Copy Mode
 
 Press `PREFIX [` enters _Copy Mode_. After quitting, press `PREFIX ]` to paste
 the selection.
