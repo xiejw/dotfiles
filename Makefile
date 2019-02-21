@@ -1,13 +1,13 @@
 # vim: foldenable foldmethod=marker foldlevel=1
 
-default: clean fmt prompt_util
+default: clean fmt custom_prompt
 
 # {{{1 Actions.
 
 # {{{2 Projects.
 
-prompt_util:
-	go build -o bin/$@ cmd/prompt_util/main.go
+custom_prompt:
+	go build -o bin/$@ cmd/custom_prompt.go
 
 # {{{2 Sync configurations.
 
