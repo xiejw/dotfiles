@@ -1,56 +1,24 @@
 package main
 
 import (
-	"bufio"
 	"flag"
 	"fmt"
-	"io"
 	"os"
-	"os/exec"
 	"runtime"
 	"strings"
+
+	"github.com/xiejw/go/exec"
 )
 
 var (
 	flagDebug = flag.Bool("debug", false, "Enable debug logging.")
 )
 
-// Executes the `cmd` with `args`, and returns the output as list of string.
-func execCmd(cmd string, args ...string) ([]string, error) {
-	var outputs []string
-	cmdExec := exec.Command(cmd, args...)
-	cmdExec.Stdin = os.Stdin
-
-	stdout, err := cmdExec.StdoutPipe()
-	if err != nil {
-		return outputs, err
-	}
-
-	cmdExec.Start()
-
-	r := bufio.NewReader(stdout)
-	for {
-		line, _, err := r.ReadLine()
-		if err == nil {
-			outputs = append(outputs, string(line))
-		} else if err == io.EOF {
-			break // detect exec error or return code
-		} else {
-			return nil, err
-		}
-	}
-	// This includes non-zero return code
-	if err = cmdExec.Wait(); err != nil {
-		return outputs, err
-	}
-	return outputs, nil
-}
-
 // Fetches the active branch name (starting with *). If not in git folder.
 // returns "".
 func getActiveBranch() (string, error) {
 	// Fetch all branches.
-	outputs, err := execCmd("git", "branch", "--no-color")
+	outputs, err := exec.RunCmd("git", "branch", "--no-color")
 	if err != nil {
 		return "", err
 	} else if len(outputs) == 0 {
@@ -68,7 +36,7 @@ func getActiveBranch() (string, error) {
 }
 
 func getBranchPendingFiles() ([]string, error) {
-	return execCmd("git", "status", "-s")
+	return exec.RunCmd("git", "status", "-s")
 }
 
 func getVimInBackground() (bool, error) {
@@ -76,9 +44,9 @@ func getVimInBackground() (bool, error) {
 	var err error
 
 	if runtime.GOOS == "darwin" {
-		outputs, err = execCmd("ps", "-T")
+		outputs, err = exec.RunCmd("ps", "-T")
 	} else {
-		outputs, err = execCmd("ps")
+		outputs, err = exec.RunCmd("ps")
 	}
 
 	if err != nil {
