@@ -10,7 +10,7 @@
 
 - Other dependencies:
 
-        [macOS] brew install ctags urlview
+        [macOS] brew install ctags urlview graphviz
         [ubuntu] sudo apt-get install exuberant-ctags urlview
 
 ## Bashrc
