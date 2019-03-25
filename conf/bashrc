@@ -47,11 +47,9 @@ fi
 export GOPATH=~/.go_mod_cache  # At Go 1.11, GOPATH is used for mod cache.
 # Customized installed go place.
 export PATH=$PATH:/usr/local/go/bin
-# All Golang third_party libraries are install in /opt/go
-export PATH=$PATH:/opt/go/bin
 
 # {{{1 Swift.
-export PATH=$PATH:/opt/swift/bin
+export PATH=$PATH:/usr/local/swift/bin
 
 # {{{1 Shortcuts.
 # {{{2 Alias.
