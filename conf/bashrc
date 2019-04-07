@@ -50,6 +50,8 @@ export PATH=$PATH:/usr/local/go/bin
 
 # {{{1 Swift.
 export PATH=$PATH:/usr/local/swift/bin
+# Used to build the swift compiler.
+export PATH=$PATH:~/Workspace/bazel_bin
 
 # {{{1 Shortcuts.
 # {{{2 Alias.
