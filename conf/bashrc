@@ -83,4 +83,5 @@ alias ta1='tmux attach -t 1 -d'
 
 # {{{2 Docker.
 alias d='docker'
+alias dr='docker run --rm -ti -v `pwd`:/source'
 
