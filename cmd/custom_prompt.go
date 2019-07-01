@@ -4,38 +4,14 @@ import (
 	"flag"
 	"fmt"
 	"os"
-	"runtime"
 	"strings"
 
 	env "github.com/xiejw/dotfiles/lib/environment"
-	"github.com/xiejw/lunar/exec"
 )
 
 var (
 	flagDebug = flag.Bool("debug", false, "Enable debug logging.")
 )
-
-func getVimInBackground() (bool, error) {
-	var outputs []string
-	var err error
-
-	if runtime.GOOS == "darwin" {
-		outputs, err = exec.RunCmd("ps", "-T")
-	} else {
-		outputs, err = exec.RunCmd("ps")
-	}
-
-	if err != nil {
-		return false, err
-	}
-
-	for _, line := range outputs {
-		if strings.Contains(line, "vim") {
-			return true, nil
-		}
-	}
-	return false, nil
-}
 
 func getVirtualEnvName() (string, error) {
 	name := os.Getenv("VIRTUAL_ENV")
@@ -105,7 +81,7 @@ func main() {
 	flag.Parse()
 
 	// Stage 1: Collect all informations in current envrinment.
-	vim, err := getVimInBackground()
+	vim, err := env.IsVimInBackground()
 	handleUnexpectedError(err)
 
 	gitBranchName, hasPendingFiles, err := env.ActiveBranch()
