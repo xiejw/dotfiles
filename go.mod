@@ -1,3 +1,3 @@
 module github.com/xiejw/dotfiles
 
-require github.com/xiejw/go v0.0.0-20190223033800-ddff1dda4780 // indirect
+require github.com/xiejw/lunar v0.0.0-20190701181243-887a5646d4bb

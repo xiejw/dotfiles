@@ -7,7 +7,7 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/xiejw/go/exec"
+	"github.com/xiejw/lunar/exec"
 )
 
 var (
