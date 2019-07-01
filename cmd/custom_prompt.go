@@ -3,8 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"os"
-	"strings"
 
 	env "github.com/xiejw/dotfiles/lib/environment"
 )
@@ -12,27 +10,6 @@ import (
 var (
 	flagDebug = flag.Bool("debug", false, "Enable debug logging.")
 )
-
-func getVirtualEnvName() (string, error) {
-	name := os.Getenv("VIRTUAL_ENV")
-	if name == "" {
-		return name, nil
-	}
-
-	// Convert /path/to/env as /p/t/env for short format.
-	s := strings.Split(name, "/")
-	output := make([]string, 0, len(s))
-	final := len(s) - 1
-	for i, part := range s {
-		switch {
-		case len(part) == 0 || i == final:
-			output = append(output, part)
-		default:
-			output = append(output, string(part[0]))
-		}
-	}
-	return strings.Join(output, "/"), nil
-}
 
 type Status struct {
 	HasVimInBg    bool
@@ -81,20 +58,20 @@ func main() {
 	flag.Parse()
 
 	// Stage 1: Collect all informations in current envrinment.
-	vim, err := env.IsVimInBackground()
+	hasVimInBg, err := env.IsVimInBackground()
 	handleUnexpectedError(err)
 
 	gitBranchName, hasPendingFiles, err := env.ActiveBranch()
 	handleUnexpectedError(err)
 
-	virtual_env_name, err := getVirtualEnvName()
+	virtualEnvName, err := env.VirtualEnvName()
 	handleUnexpectedError(err)
 
 	status := Status{
-		HasVimInBg:    vim,
+		HasVimInBg:    hasVimInBg,
 		GitMasterName: gitBranchName,
 		GitLocalChane: hasPendingFiles,
-		VirtualEnv:    virtual_env_name,
+		VirtualEnv:    virtualEnvName,
 	}
 
 	printPromot(status)
