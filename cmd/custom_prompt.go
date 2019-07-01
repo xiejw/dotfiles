@@ -7,9 +7,7 @@ import (
 	env "github.com/xiejw/dotfiles/lib/environment"
 )
 
-var (
-	flagDebug = flag.Bool("debug", false, "Enable debug logging.")
-)
+var flagDebug = flag.Bool("debug", false, "Enable debug logging.")
 
 type Status struct {
 	HasVimInBg    bool
@@ -18,8 +16,7 @@ type Status struct {
 	VirtualEnv    string // "" means "no"
 }
 
-// Should print right " ".
-func printPromot(status Status) {
+func (status Status) printPrompt() {
 	vim_info := ""
 	if status.HasVimInBg {
 		vim_info = "--vim-- "
@@ -67,12 +64,12 @@ func main() {
 	virtualEnvName, err := env.VirtualEnvName()
 	handleUnexpectedError(err)
 
+	// Stage 2: Prints the the prompt.
 	status := Status{
 		HasVimInBg:    hasVimInBg,
 		GitMasterName: gitBranchName,
 		GitLocalChane: hasPendingFiles,
 		VirtualEnv:    virtualEnvName,
 	}
-
-	printPromot(status)
+	status.printPrompt()
 }
