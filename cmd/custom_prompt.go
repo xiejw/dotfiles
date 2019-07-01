@@ -7,37 +7,13 @@ import (
 	"runtime"
 	"strings"
 
+	env "github.com/xiejw/dotfiles/lib/environment"
 	"github.com/xiejw/lunar/exec"
 )
 
 var (
 	flagDebug = flag.Bool("debug", false, "Enable debug logging.")
 )
-
-// Fetches the active branch name (starting with *). If not in git folder.
-// returns "".
-func getActiveBranch() (string, error) {
-	// Fetch all branches.
-	outputs, err := exec.RunCmd("git", "branch", "--no-color")
-	if err != nil {
-		return "", err
-	} else if len(outputs) == 0 {
-		return "", fmt.Errorf("Cannot find any branch")
-	}
-
-	for _, line := range outputs {
-		// Find the active branch. At least 3 chars
-		if len(line) >= 3 && line[0] == '*' {
-			return line[2:], nil
-		}
-	}
-
-	return "", fmt.Errorf("Cannot find active branch")
-}
-
-func getBranchPendingFiles() ([]string, error) {
-	return exec.RunCmd("git", "status", "-s")
-}
 
 func getVimInBackground() (bool, error) {
 	var outputs []string
@@ -132,24 +108,16 @@ func main() {
 	vim, err := getVimInBackground()
 	handleUnexpectedError(err)
 
-	branch_name, err := getActiveBranch()
+	gitBranchName, hasPendingFiles, err := env.ActiveBranch()
 	handleUnexpectedError(err)
 
 	virtual_env_name, err := getVirtualEnvName()
 	handleUnexpectedError(err)
 
-	has_pending_files := false
-	// If inside git repository, try to see whether there are some pending files.
-	if branch_name != "" {
-		pending_files, err := getBranchPendingFiles()
-		handleUnexpectedError(err)
-		has_pending_files = len(pending_files) > 0
-	}
-
 	status := Status{
 		HasVimInBg:    vim,
-		GitMasterName: branch_name,
-		GitLocalChane: has_pending_files,
+		GitMasterName: gitBranchName,
+		GitLocalChane: hasPendingFiles,
 		VirtualEnv:    virtual_env_name,
 	}
 
