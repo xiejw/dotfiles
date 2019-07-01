@@ -61,10 +61,10 @@ func getVimInBackground() (bool, error) {
 	return false, nil
 }
 
-func getVirtualEnvName() string {
+func getVirtualEnvName() (string, error) {
 	name := os.Getenv("VIRTUAL_ENV")
 	if name == "" {
-		return name
+		return name, nil
 	}
 
 	// Convert /path/to/env as /p/t/env for short format.
@@ -79,7 +79,7 @@ func getVirtualEnvName() string {
 			output = append(output, string(part[0]))
 		}
 	}
-	return strings.Join(output, "/")
+	return strings.Join(output, "/"), nil
 }
 
 type Status struct {
@@ -115,6 +115,10 @@ func printPromot(status Status) {
 	fmt.Printf("%s%s%s", git_info, vim_info, virtual_env_info)
 }
 
+// A helper method to handle the error situation.
+//
+// The flag `debug` will enable the error printing. Otherwise, the program just
+// eats the error message (no output will be produced).
 func handleUnexpectedError(err error) {
 	if *flagDebug && err != nil {
 		fmt.Printf("E %v\n", err)
@@ -124,15 +128,18 @@ func handleUnexpectedError(err error) {
 func main() {
 	flag.Parse()
 
+	// Stage 1: Collect all informations in current envrinment.
 	vim, err := getVimInBackground()
 	handleUnexpectedError(err)
 
 	branch_name, err := getActiveBranch()
 	handleUnexpectedError(err)
 
-	virtual_env_name := getVirtualEnvName()
+	virtual_env_name, err := getVirtualEnvName()
+	handleUnexpectedError(err)
 
 	has_pending_files := false
+	// If inside git repository, try to see whether there are some pending files.
 	if branch_name != "" {
 		pending_files, err := getBranchPendingFiles()
 		handleUnexpectedError(err)
