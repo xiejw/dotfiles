@@ -9,6 +9,7 @@ import (
 
 var flagDebug = flag.Bool("debug", false, "Enable debug logging.")
 
+// Records the current status of environment.
 type Status struct {
 	HasVimInBg    bool
 	GitMasterName string // "" means not inside git folder.
@@ -16,7 +17,7 @@ type Status struct {
 	VirtualEnv    string // "" means "no"
 }
 
-func (status Status) printPrompt() {
+func (status *Status) printPrompt() {
 	vim_info := ""
 	if status.HasVimInBg {
 		vim_info = "--vim-- "
@@ -28,14 +29,12 @@ func (status Status) printPrompt() {
 		if status.GitLocalChane {
 			status_symbol = "*"
 		}
-		git_info = fmt.Sprintf(
-			"(%s%s) ", status.GitMasterName, status_symbol)
+		git_info = fmt.Sprintf("(%s%s) ", status.GitMasterName, status_symbol)
 	}
 
 	virtual_env_info := ""
 	if status.VirtualEnv != "" {
-		virtual_env_info = fmt.Sprintf(
-			"[py:%s] ", status.VirtualEnv)
+		virtual_env_info = fmt.Sprintf("[py:%s] ", status.VirtualEnv)
 	}
 
 	fmt.Printf("%s%s%s", git_info, vim_info, virtual_env_info)
@@ -65,7 +64,7 @@ func main() {
 	handleUnexpectedError(err)
 
 	// Stage 2: Prints the the prompt.
-	status := Status{
+	status := &Status{
 		HasVimInBg:    hasVimInBg,
 		GitMasterName: gitBranchName,
 		GitLocalChane: hasPendingFiles,

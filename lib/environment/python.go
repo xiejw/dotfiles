@@ -5,6 +5,8 @@ import (
 	"strings"
 )
 
+// Reads the virtual environment name from environment variable. Returns "" if
+// not present.
 func VirtualEnvName() (string, error) {
 	name := os.Getenv("VIRTUAL_ENV")
 	if name == "" {
