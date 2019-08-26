@@ -22,6 +22,12 @@ Append the following block at the end of `~/.bashrc`, `~/.bash_profile`, or
     export DOTFILES=~/Workspace/dotfiles
     source ~/Workspace/dotfiles/conf/bashrc
 
+## Kitty
+
+    mkdir -p  ~/.config/kitty
+    rm ~/.config/kitty/kitty.conf
+    ln -sf ~/Workspace/dotfiles/conf/kitty.conf ~/.config/kitty/kitty.conf
+
 ## Tmux
 
 Link the file:
