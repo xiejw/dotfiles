@@ -27,6 +27,7 @@ Append the following block at the end of `~/.bashrc`, `~/.bash_profile`, or
     mkdir -p  ~/.config/kitty
     rm ~/.config/kitty/kitty.conf
     ln -sf ~/Workspace/dotfiles/conf/kitty.conf ~/.config/kitty/kitty.conf
+    ln -sf ~/Workspace/dotfiles/conf/zoom_toggle.py ~/.config/kitty/
 
 ## Tmux
 
