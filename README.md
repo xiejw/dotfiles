@@ -38,6 +38,10 @@ Link the file:
 - See [here](doc/tmux.md#tmux-cheatsheet) for cheatsheet.
 - See [here](doc/tmux.md#install) for installing from source code.
 
+## Brew (macOS)
+
+- See [here](doc/brew.md).
+
 ## Xorg (Linux Workstation)
 
 ### Xmonad
