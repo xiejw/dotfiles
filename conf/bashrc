@@ -83,3 +83,7 @@ alias dr='docker run --rm -ti -v `pwd`:/source'
 export CC=clang
 export CXX=clang++
 
+# {{{2 CMake
+# In case cmake needs manual install due to version requirement.
+export PATH=~/Workspace/cmake-bin/bin:$PATH
+
