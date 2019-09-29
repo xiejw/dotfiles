@@ -82,6 +82,9 @@ alias dr='docker run --rm -ti -v `pwd`:/source'
 # {{{2 Make.
 alias m='make'
 
+# {{{2 Vim.
+alias v='vim'
+
 # {{{2 Clang
 export CC=clang
 export CXX=clang++
