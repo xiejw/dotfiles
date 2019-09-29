@@ -63,7 +63,7 @@ fi
 
 # {{{2 Git.
 alias g='git'
-alias ga='git add .'
+alias ga='git add . && git status -s'
 alias gs='git status -s'
 alias gd='git diff'
 alias gdd='git diff --cached'
