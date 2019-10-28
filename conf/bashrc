@@ -82,6 +82,7 @@ alias dr='docker run --rm -ti -v `pwd`:/source'
 
 # {{{2 Make.
 alias m='make'
+alias mf='make fmt'
 alias mt='make test'
 alias mtv='make VERBOSE=1 test'
 
