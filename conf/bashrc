@@ -100,3 +100,6 @@ export PATH=~/Workspace/cmake-bin/bin:$PATH
 # {{{2 Brew
 export PATH=~/Workspace/homebrew/bin:$PATH
 export QT_QPA_PLATFORM_PLUGIN_PATH=/Users/xiejw/Workspace/homebrew/opt/qt/plugins/
+
+# {{{2 macOS
+export BASH_SILENCE_DEPRECATION_WARNING=1
