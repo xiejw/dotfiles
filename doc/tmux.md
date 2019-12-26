@@ -63,6 +63,12 @@ https://gist.github.com/andreyvit/2921703 as reference):
     Detach others          [tmux] PREFIX D
     Switch                 [tmux] :choose-tree
 
+## Other Cmds
+
+
+    Set pane sizes         select-layout even-vertical
+    Set pane sizes         select-layout even-horizontal
+
 ## Copy Mode
 
 Press `PREFIX [` enters _Copy Mode_. After quitting, press `PREFIX ]` to paste
