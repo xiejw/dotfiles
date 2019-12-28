@@ -65,9 +65,9 @@ https://gist.github.com/andreyvit/2921703 as reference):
 
 ## Other Cmds
 
-
     Set pane sizes         select-layout even-vertical
     Set pane sizes         select-layout even-horizontal
+    Renumber window        move-window -s <original_number> -t <new_number>
 
 ## Copy Mode
 
