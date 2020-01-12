@@ -4,13 +4,17 @@
 
 - In `Docker`, Choose a small size and disable auto-hide.
 - In `Keyboard`, disable `CapsLock`.
-- In `Spotlight > Privacy`, remove `~/Downloads` in Spotlight.
-- In `Spotlight > Search Results`, remove `Music, Movies, Mail`.
-- In `Mission Control`, set the left-top corner for `Put Display to
-  Sleep`.
-- In `General`, set number of Recent Items to `None`.
-- In `General`, uncheck `Allow Handoff between this Mac and other
-  iClo
+- In `Spotlight`
+  - In `Privacy`, remove `~/Downloads` in Spotlight.
+  - In `Search Results`, remove `Music, Movies, Mail`.
+- In `Mission Control`
+  - Set the left-top corner for `Put Display to Sleep`.
+  - Disable `Automatically rearrange Spaces based on most recent use`.
+  - Set `Group windows by application`.
+- In `General`
+  - Set number of Recent Items to `None`.
+  - Uncheck `Allow Handoff between this Mac and your iCloud devices`
+
 - In `TimeMachine`, remove
 
         ~/Downloads
@@ -18,14 +22,14 @@
         ~/Library/Containers/com.docker.docker
 
 
-## Applications
+### Applications
 
-- For **IINA**, turn on `2x window during start up` and `Float Window`.
-- For **Screenshot**, click `Options` and uncheck `Show Floating Thumbnail`.
+- For `IINA`, turn on `2x window during start up` and `Float Window`.
+- For `Screenshot`, click `Options` and uncheck `Show Floating Thumbnail`.
 
-## Other Tips
+### Other Tips
 
-## Clean History
+#### Clean History
 
     # Clear paste board.
 
