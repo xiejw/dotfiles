@@ -75,6 +75,8 @@ alias gg='git log --graph --oneline --all'
 alias tmux="TERM=screen-256color-bce tmux -2"
 alias tad='tmux attach -t 0 -d'
 alias ta1='tmux attach -t 1 -d'
+alias ta2='tmux attach -t 2 -d'
+alias ta3='tmux attach -t 3 -d'
 
 # {{{2 Docker.
 alias d='docker'
