@@ -2,6 +2,8 @@
 
 ### System Preference
 
+- In `Finder`, preference,
+  - In `Advanced`, set `Search the Current Folder` in `When performing a search`.
 - In `Docker`, Choose a small size and disable auto-hide.
 - In `Keyboard`, disable `CapsLock`.
 - In `Spotlight`
