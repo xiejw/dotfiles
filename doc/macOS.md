@@ -31,6 +31,10 @@
 
 ### Other Tips
 
+#### Disable All Notifications for non-Personal devices.
+
+Set up the Do Not Disturb to make it 24-hour.
+
 #### Clean History
 
     # Clear paste board.
