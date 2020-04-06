@@ -28,6 +28,7 @@
 
 - For `IINA`, turn on `2x window during start up` and `Float Window`.
 - For `Screenshot`, click `Options` and uncheck `Show Floating Thumbnail`.
+- For `Chrome`, disable `Notification` for all sites.
 
 ### Other Tips
 
