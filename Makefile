@@ -10,7 +10,7 @@ custom_prompt:
 	go build -o bin/$@ cmd/$@.go
 
 sync_git_repo:
-	${CC} -Wall -Werror -o bin/$@ cmd/$@.c
+	${CC} -Wall -Werror -I. -o bin/$@ cmd/$@.c
 
 # {{{2 Sync configurations.
 
