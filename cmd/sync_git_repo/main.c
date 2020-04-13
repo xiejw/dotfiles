@@ -14,7 +14,11 @@ int handle_repo(char* path) {
   /* Lifttime of git_status is same as normalized_path. */
   git_status.path = normalized_path;
 
-  if (0 != git_read(&git_status)) return -1;
+  if (0 != git_read(&git_status)) {
+    printf("\033[1;31mError: %s\033[0m\n", normalized_path);
+  } else {
+    printf("\033[1;32mSuccess.\033[0m\n");
+  }
   return 0;
 }
 
