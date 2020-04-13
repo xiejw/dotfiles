@@ -1,4 +1,11 @@
 # vim: foldenable foldmethod=marker foldlevel=1
+#
+C_FMT=docker run --rm -ti \
+        --user `id -u ${USER}`:`id -g ${USER}` \
+        -v `pwd`:/workdir xiejw/clang-format \
+        /clang-format.sh
+
+GO_FMT=gofmt -w -l
 
 default: clean fmt custom_prompt
 
@@ -19,8 +26,9 @@ sync_gentoolet:
 
 # {{{2 Maintenance.
 fmt:
-	gofmt -w -l cmd
-	gofmt -w -l go
+	${GO_FMT} cmd
+	${GO_FMT} go
+	${C_FMT} cmd c
 
 clean:
 	rm -f bin/*
