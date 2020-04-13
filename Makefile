@@ -17,7 +17,7 @@ sync_gentoolet:
 # {{{2 Maintenance.
 fmt:
 	gofmt -w -l cmd
-	gofmt -w -l pkg
+	gofmt -w -l go
 
 clean:
 	rm -f bin/*
