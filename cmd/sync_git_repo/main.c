@@ -20,12 +20,12 @@ int handle_repo(char* path) {
 
 int main() {
   char* repos[] = {
-    "~/Workspace/dotfiles",
-    "~/Workspace/vimrc",
-    "~/Workspace/mlvm",
+      "~/Workspace/dotfiles",
+      "~/Workspace/vimrc",
+      "~/Workspace/mlvm",
   };
 
-  int repo_count = sizeof(repos)/sizeof(char*);
+  int repo_count = sizeof(repos) / sizeof(char*);
   int i;
 
   for (i = 0; i < repo_count; ++i) {

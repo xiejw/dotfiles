@@ -7,17 +7,17 @@ C_FMT=docker run --rm -ti \
 
 GO_FMT=gofmt -w -l
 
-default: clean fmt custom_prompt
+default: custom_prompt sync_git_repo
 
 # {{{1 Actions.
 
 # {{{2 Projects.
 
 custom_prompt:
-	go build -o bin/$@ cmd/$@.go
+	go build -o bin/$@ cmd/$@/main.go
 
 sync_git_repo:
-	${CC} -std=c89 -Wall -Werror -I. -o bin/$@ cmd/$@.c
+	${CC} -std=c89 -Wall -Werror -I. -o bin/$@ cmd/$@/main.c
 
 # {{{2 Sync configurations.
 
