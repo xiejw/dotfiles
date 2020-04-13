@@ -7,7 +7,10 @@ default: clean fmt custom_prompt
 # {{{2 Projects.
 
 custom_prompt:
-	go build -o bin/$@ cmd/custom_prompt.go
+	go build -o bin/$@ cmd/$@.go
+
+sync_git_repo:
+	${CC} -Wall -Werror -o bin/$@ cmd/$@.c
 
 # {{{2 Sync configurations.
 
