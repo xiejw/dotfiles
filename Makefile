@@ -11,9 +11,6 @@ custom_prompt:
 
 # {{{2 Sync configurations.
 
-sync_gentoolet:
-	./conf/gentoolet/sync.sh
-
 # {{{2 Maintenance.
 fmt:
 	gofmt -w -l cmd
