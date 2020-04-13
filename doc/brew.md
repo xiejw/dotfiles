@@ -15,10 +15,10 @@ For this case, Qt related envs must be adjusted. For `gnuplot`, it can be set as
 Common Packages to Install
 --------------------------
 
+    brew install cmake
     brew install tmux
     brew install graphviz
     brew install bash-completion
-    brew install
 
 Command CLI
 -----------
@@ -27,14 +27,16 @@ Command CLI
     brew upgrade
     brew cask upgrade
     brew doctor
-    brew cleanup
+    brew cleanup -s [-n]
     brew list
     brew cask list
 
     brew info package_name
 
-Print Package Size
-------------------
+## Clean Up
+
+
+### Print Package Size
 
 ```
 for pkg in `brew list -f1 | egrep -v '\.|\.\.'`
@@ -42,3 +44,7 @@ for pkg in `brew list -f1 | egrep -v '\.|\.\.'`
 done
 ```
 
+### Cache Folder
+
+Run `brew --cache` to get the folder path. Note that `brew cleanup` does not
+clean it. So manually cleanup is needed.
