@@ -1,5 +1,5 @@
-#ifndef DOTFILES_C_PATHS_H_
-#define DOTFILES_C_PATHS_H_
+#ifndef DOTFILES_C_PATH_H_
+#define DOTFILES_C_PATH_H_
 
 #include <string.h>
 #include <wordexp.h>

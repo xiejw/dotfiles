@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+#include "c/git.h"
 #include "c/path.h"
 
 #define MAX_PATH_LEN 100
@@ -8,6 +9,12 @@ int handle_repo(char* path) {
   char normalized_path[MAX_PATH_LEN];
   if (expand_tilde_path(path, normalized_path) != 0) return -1;
   printf("-> Handling: %s\n", normalized_path);
+
+  git_status_t git_status;
+  /* Lifttime of git_status is same as normalized_path. */
+  git_status.path = normalized_path;
+
+  if (0 != git_read(&git_status)) return -1;
   return 0;
 }
 
