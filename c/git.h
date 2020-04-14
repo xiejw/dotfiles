@@ -14,10 +14,6 @@ typedef struct {
  * Reads the repository status.
  *
  * For the provided `status`, `path` must be set by caller.
- *
- * Returns:
- *   0 if succeed; otherwise, `status->err` will be set. Error message is
- *   pointed to the static data in the binary.
  */
 error_t* git_read(git_status_t* status) {
   char* const path = status->path;

@@ -9,11 +9,20 @@ enum Color {
 };
 
 /*
- * Prints the message with color. Flush is needed to ensure the color reset
- * applied in place immediately.
+ * Prints the message with color.
  *
  * Due to the limitation of variadic macro, if no argument is provided, use
  * `color_print`.
+ *
+ * Usage:
+ *
+ * ```
+ * color_printf(COLOR_FYI, "Processing %s...\n", item_name);
+ *
+ * color_print(COLOR_FYI, "Processing ...\n");
+ * ```
+ *
+ * Flush is needed to ensure the color reset applied in place immediately.
  */
 #define color_printf(c, fmt, ...)                     \
   printf("\033[1;%dm" fmt "\033[0m", c, __VA_ARGS__); \
