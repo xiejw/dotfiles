@@ -71,6 +71,7 @@ alias gm='git commit -am'
 ## --recurse-submodules
 alias gp='git pull --rebase'
 alias gg='git log --graph --oneline --all'
+alias gpa='~/Workspace/dotfiles/bin/sync_git_repo'
 
 # {{{2 Tmux.
 alias tmux="TERM=screen-256color-bce tmux -2"
