@@ -4,6 +4,30 @@
 /*
  * For non-error case, this should be as cheap as returnning `int` as value.
  * The down side is user needs to free error resource to avoid memory leak.
+ *
+ * Usage:
+ *
+ *   - For function returnining error_t*, consider to use
+ *
+ *   ```
+ *   error_t* foo(..) {
+ *     return OK();
+ *     return ERROR("Failure reason.");
+ *   }
+ *   ```
+ *
+ *   - For function hanlding error_t*, consider to use
+ *
+ *   void bar(...) {
+ *     DECLARE_ERROR(err);
+ *
+ *     if (SUCCEEDED(err = foo())) {
+ *       ...
+ *     }
+ *
+ *     FREE_ERROR(err);
+ *     return;
+ *   }
  */
 typedef struct {
   char* err_msg; /* error message, must point to static message char array. */

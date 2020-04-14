@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <unistd.h>
 
+#include "c/color_print.h"
 #include "c/git.h"
 #include "c/path.h"
-#include "c/color_print.h"
 
 #define NO_SEVERE_ERROR 0
 #define MAX_PATH_LEN 100
@@ -45,11 +45,8 @@ int handle_repo(char* path) {
 
 int main() {
   char* repos[] = {
-      "~/Workspace/dotfiles",
-      "~/Workspace/vimrc",
-      "~/Workspace/mlvm",
-      "~/Workspace/dockerfiles",
-      "~/Workspace/notes",
+      "~/Workspace/dotfiles",    "~/Workspace/vimrc", "~/Workspace/mlvm",
+      "~/Workspace/dockerfiles", "~/Workspace/notes",
   };
 
   int repo_count = sizeof(repos) / sizeof(char*);
