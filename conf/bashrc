@@ -68,8 +68,8 @@ alias gs='git status -s'
 alias gd='git diff'
 alias gdd='git diff --cached'
 alias gm='git commit -am'
-##  --rebase --recurse-submodules'
-alias gp='git pull'
+## --recurse-submodules
+alias gp='git pull --rebase'
 alias gg='git log --graph --oneline --all'
 
 # {{{2 Tmux.

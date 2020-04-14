@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 
-	env "github.com/xiejw/dotfiles/pkg/environment"
+	env "github.com/xiejw/dotfiles/go/environment"
 )
 
 var flagDebug = flag.Bool("debug", false, "Enable debug logging.")

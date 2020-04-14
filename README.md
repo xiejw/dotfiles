@@ -38,13 +38,13 @@ Link the file:
 - See [here](doc/tmux.md#tmux-cheatsheet) for cheatsheet.
 - See [here](doc/tmux.md#install) for installing from source code.
 
+# Configuration for Daily Tools
+
 ## Brew (macOS)
 
 - See [here](doc/brew.md).
 
-## Xorg (Linux Workstation)
-
-### Xmonad
+## XMonad
 
 - See [manpage](https://xmonad.org/manpage.html) for default key bindings.
 - See [here](doc/xmonad_cheatsheet.md) for layout cheatsheet.
