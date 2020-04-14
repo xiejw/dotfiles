@@ -6,20 +6,28 @@
 #define MAX_PATH_LEN 100
 
 int handle_repo(char* path) {
+  DECLARE_ERROR(err);
+
   char normalized_path[MAX_PATH_LEN];
-  if (expand_tilde_path(path, normalized_path) != 0) return -1;
+  if (0 != expand_tilde_path(path, normalized_path)) {
+    FREE_ERROR(err);
+    return -1;
+  }
+
   printf("\033[1;36mPulling: %s\033[0m\n", normalized_path);
 
   git_status_t git_status;
   /* Lifttime of git_status is same as normalized_path. */
   git_status.path = normalized_path;
 
-  if (0 != git_read(&git_status)) {
-    printf("\033[1;31mError: %s\n  Repo at: %s\033[0m\n", git_status.err,
-           normalized_path);
-  } else {
+  if (SUCCEEDED(err = git_read(&git_status))) {
     printf("\033[1;32mSuccess.\033[0m\n");
+  } else {
+    printf("\033[1;31mError: %s\n  Repo at: %s\033[0m\n", err->err_msg,
+           normalized_path);
   }
+
+  FREE_ERROR(err);
   return 0;
 }
 
