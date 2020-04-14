@@ -27,7 +27,7 @@ error_t* git_read(git_status_t* status) {
   }
 
   if (0 != system("git pull --rebase")) {
-    return ERROR("Failed to pull from remote.");
+    return ERROR("Failed to pull from remote git repository.");
   }
 
   return OK();

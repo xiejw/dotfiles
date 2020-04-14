@@ -4,29 +4,30 @@
 #include <string.h>
 #include <wordexp.h>
 
+#include "c/error.h"
+
 /*
  * Expands the `~` in the path.
  *
  * Args:
  *   - `dst` must be large enough to hold the result.
- *
- * Returns:
- *   0 for no error.
  */
-int expand_tilde_path(char* original_path, char* dst) {
+error_t* expand_tilde_path(char* original_path, char* dst) {
   wordexp_t exp_result;
-  if (wordexp(original_path, &exp_result, /*flags=*/0)) return -1;
+  if (0 != wordexp(original_path, &exp_result, /*flags=*/0)) {
+    return ERROR("Failed to expand tilde path.");
+  }
 
   /* Only the simpliest case is supported: one output. So error out for others.
    */
   if (exp_result.we_wordc != 1) {
     wordfree(&exp_result);
-    return -2;
+    return ERROR("Too many results after expanding tilde path.");
   }
 
   strcpy(dst, exp_result.we_wordv[0]);
   wordfree(&exp_result);
-  return 0;
+  return OK();
 }
 
 #endif

@@ -1,11 +1,15 @@
 #ifndef DOTFILES_C_ERROR_H_
 #define DOTFILES_C_ERROR_H_
 
+/*
+ * For non-error case, this should be as cheap as returnning `int` as value.
+ * The down side is user needs to free error resource to avoid memory leak.
+ */
 typedef struct {
   char* err_msg; /* error message, must point to static message char array. */
 } error_t;
 
-#define SUCCEEDED(x) (NULL != (x))
+#define SUCCEEDED(x) (NULL == (x))
 
 #define OK() NULL
 

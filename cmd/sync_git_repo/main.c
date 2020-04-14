@@ -9,7 +9,8 @@ int handle_repo(char* path) {
   DECLARE_ERROR(err);
 
   char normalized_path[MAX_PATH_LEN];
-  if (0 != expand_tilde_path(path, normalized_path)) {
+  if (!SUCCEEDED(err = expand_tilde_path(path, normalized_path))) {
+    printf("\033[1;31mError: %s\n  Repo at: %s\033[0m\n", err->err_msg, path);
     FREE_ERROR(err);
     return -1;
   }
@@ -20,6 +21,7 @@ int handle_repo(char* path) {
   /* Lifttime of git_status is same as normalized_path. */
   git_status.path = normalized_path;
 
+  /* For any `git_read` failure, we just log them. return value is zero. */
   if (SUCCEEDED(err = git_read(&git_status))) {
     printf("\033[1;32mSuccess.\033[0m\n");
   } else {
