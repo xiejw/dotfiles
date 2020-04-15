@@ -16,17 +16,17 @@ typedef struct {
  * For the provided `status`, `path` must be set by caller.
  *
  * Returns:
- *   - OK, ENOT_PATH, EGIT_PULL.
+ *   - OK, ENOTPATH, EGITPULL.
  */
 error_t git_read(git_status_t* status) {
   char* const path = status->path;
 
   if (OK != chdir(path)) {
-    return ENOT_PATH;
+    return ENOTPATH;
   }
 
   if (OK != system("git pull --rebase")) {
-    return EGIT_PULL;
+    return EGITPULL;
   }
 
   return OK;
