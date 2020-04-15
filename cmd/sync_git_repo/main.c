@@ -5,24 +5,19 @@
 #include "c/git.h"
 #include "c/path.h"
 
-#define NO_SEVERE_ERROR 0
 #define MAX_PATH_LEN 100
 
-int handle_repo(char* path) {
-  DECLARE_ERROR(err);
-
+error_t handle_repo(char* path) {
   char normalized_path[MAX_PATH_LEN];
-  if (!SUCCEEDED(err = expand_tilde_path(path, normalized_path))) {
-    color_printf(COLOR_ERROR, "Error: %s\n  Repo at: %s\n", err->err_msg, path);
-    FREE_ERROR(err);
+  if (OK != expand_tilde_path(path, normalized_path)) {
+    color_printf(COLOR_ERROR, "Error: not a valid path\n  Repo at: %s\n", path);
     return -1;
   }
 
-  if (0 != access(normalized_path, F_OK)) {
+  if (OK != access(normalized_path, F_OK)) {
     color_printf(COLOR_FYI, "Skip repository as not existed\n  Repo at: %s\n",
                  normalized_path);
-    FREE_ERROR(err);
-    return NO_SEVERE_ERROR;
+    return OK;
   }
 
   color_printf(COLOR_INFO, "Pulling: %s\n", normalized_path);
@@ -32,15 +27,14 @@ int handle_repo(char* path) {
   git_status.path = normalized_path;
 
   /* For any `git_read` failure, we just log them. return value is zero. */
-  if (SUCCEEDED(err = git_read(&git_status))) {
+  if (OK == git_read(&git_status)) {
     color_print(COLOR_SUCCESS, "Success.\n");
   } else {
-    color_printf(COLOR_ERROR, "Error: %s\n  Repo at: %s\n", err->err_msg,
+    color_printf(COLOR_ERROR, "Error: failed to pull the git repo.\n  Repo at: %s\n",
                  normalized_path);
   }
 
-  FREE_ERROR(err);
-  return NO_SEVERE_ERROR;
+  return OK;
 }
 
 int main() {
@@ -53,7 +47,7 @@ int main() {
   int i;
 
   for (i = 0; i < repo_count; ++i) {
-    if (handle_repo(repos[i]) != NO_SEVERE_ERROR) return -1;
+    if (OK != handle_repo(repos[i])) return -1;
   }
 
   return 0;
