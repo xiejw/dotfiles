@@ -54,6 +54,12 @@ error_t handle_repo_list(char** repo_list, int repo_count) {
   return OK;
 }
 
+/*
+ * Reads the config file at `config_path`. Each line is a repo list for local
+ * host.
+ *
+ * The repo_list should be free via `free_repo_list` later.
+ */
 error_t read_repo_list_from_config_file(char* config_path, char*** repo_list,
                                         int* count, int max_count) {
   char normalized_path[MAX_PATH_LEN];
@@ -86,13 +92,14 @@ error_t read_repo_list_from_config_file(char* config_path, char*** repo_list,
       color_printf(COLOR_ERROR, "Failed to read config File at: %s\n",
                    normalized_path);
       err = EREADFILE;
+      free(line);
       break;
     }
 
     (*repo_list)[(*count)++] = line;
   };
 
-  if (err != OK && *count == max_count) {
+  if (*count == max_count) {
     color_printf(COLOR_ERROR, "Too many lines in config File at: %s\n",
                  normalized_path);
     err = EUNSPECIFIED;
@@ -102,6 +109,9 @@ error_t read_repo_list_from_config_file(char* config_path, char*** repo_list,
   return err;
 };
 
+/*
+ * Frees repo_list and all resources in it.
+ */
 void free_repo_list(char** repo_list, int count) {
   int i;
   for (i = 0; i < count; i++) {
@@ -127,8 +137,8 @@ int main() {
     char** repos = NULL;
     int repo_count;
 
-    if (read_repo_list_from_config_file("~/.git_repo_list", &repos, &repo_count,
-                                        MAX_REPO_COUNT))
+    if (OK != read_repo_list_from_config_file("~/.git_repo_list", &repos,
+                                              &repo_count, MAX_REPO_COUNT))
       return EUNSPECIFIED;
 
     if (OK != handle_repo_list(repos, repo_count)) return EUNSPECIFIED;
