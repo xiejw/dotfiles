@@ -69,6 +69,14 @@ error_t read_repo_list_from_config_file(char* config_path, char*** repo_list,
     return ENOTPATH;
   }
 
+  /* If the config file is not present, just ignore it. */
+  if (OK != access(normalized_path, F_OK)) {
+    color_printf(COLOR_FYI, "Skip config file as not existed: %s\n",
+                 normalized_path);
+    *count = 0;
+    return OK;
+  }
+
   fr_handle_t* handle;
   if (OK != fr_open(&handle, normalized_path)) {
     color_printf(COLOR_ERROR, "Failed to open config File at: %s\n",
