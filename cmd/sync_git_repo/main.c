@@ -7,6 +7,7 @@
 #include "c/path.h"
 
 #define MAX_PATH_LEN 100
+#define MAX_REPO_COUNT 50
 
 /*
  * Takes action on a single repo.
@@ -59,19 +60,20 @@ error_t read_repo_list_from_config_file(char* config_path, char*** repo_list,
   if (OK != expand_tilde_path(config_path, normalized_path)) {
     color_printf(COLOR_ERROR, "Error: not a valid path\n  Config File at: %s\n",
                  config_path);
-    return -1;
+    return ENOTPATH;
   }
 
   fr_handle_t* handle;
   if (OK != fr_open(&handle, normalized_path)) {
     color_printf(COLOR_ERROR, "Failed to open config File at: %s\n",
                  normalized_path);
-    return -2;
+    return EOPENFILE;
   }
 
   *count = 0;
   *repo_list = malloc(max_count * sizeof(char*));
 
+  error_t err = OK;
   while ((*count) < max_count) {
     char* line = malloc(MAX_PATH_LEN);
     int len = fr_next_line(handle, line);
@@ -83,23 +85,21 @@ error_t read_repo_list_from_config_file(char* config_path, char*** repo_list,
     if (len < 0) {
       color_printf(COLOR_ERROR, "Failed to read config File at: %s\n",
                    normalized_path);
-      fr_close(handle);
-      return -3;
+      err = EREADFILE;
+      break;
     }
 
     (*repo_list)[(*count)++] = line;
-    printf("%s\n", line);
   };
 
-  if (*count == max_count) {
+  if (err != OK && *count == max_count) {
     color_printf(COLOR_ERROR, "Too many lines in config File at: %s\n",
                  normalized_path);
-    fr_close(handle);
-    return -3;
+    err = EUNSPECIFIED;
   }
 
   fr_close(handle);
-  return OK;
+  return err;
 };
 
 void free_repo_list(char** repo_list, int count) {
@@ -119,20 +119,22 @@ int main() {
     };
 
     int repo_count = sizeof(repos) / sizeof(char*);
-    handle_repo_list(repos, repo_count);
+    if (OK != handle_repo_list(repos, repo_count)) return EUNSPECIFIED;
   }
 
   /* A customized list of repos for local host. */
   {
     char** repos = NULL;
     int repo_count;
+
     if (read_repo_list_from_config_file("~/.git_repo_list", &repos, &repo_count,
-                                        /*max_count=*/50)) {
-      return -1;
-    }
-    handle_repo_list(repos, repo_count);
+                                        MAX_REPO_COUNT))
+      return EUNSPECIFIED;
+
+    if (OK != handle_repo_list(repos, repo_count)) return EUNSPECIFIED;
+
     free_repo_list(repos, repo_count);
   }
 
-  return 0;
+  return OK;
 }

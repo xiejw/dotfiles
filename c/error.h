@@ -4,11 +4,12 @@
 typedef int error_t;
 
 #define OK 0
-#define ENOTPATH -1        /* Not a valid path. */
-#define EGITPULL -2        /* Failure during git pull */
-#define ETOOMANYRESULTS -3 /* Expect single result. */
-#define EOPENFILE -4       /* Failure during opening file. */
-#define EREADFILE -5       /* Failure during reading file. */
-#define ELINELEN -6        /* Line is too long. */
+#define EUNSPECIFIED -1    /* An unspecified general error. */
+#define ENOTPATH -2        /* Not a valid path. */
+#define EGITPULL -3        /* Failure during git pull */
+#define ETOOMANYRESULTS -4 /* Expect single result. */
+#define EOPENFILE -5       /* Failure during opening file. */
+#define EREADFILE -6       /* Failure during reading file. */
+#define ELINELEN -7        /* Line is too long. */
 
 #endif
