@@ -2,11 +2,15 @@
 #include <unistd.h>
 
 #include "c/color_print.h"
+#include "c/file_reader.h"
 #include "c/git.h"
 #include "c/path.h"
 
 #define MAX_PATH_LEN 100
 
+/*
+ * Takes action on a single repo.
+ */
 error_t handle_repo(char* path) {
   char normalized_path[MAX_PATH_LEN];
   if (OK != expand_tilde_path(path, normalized_path)) {
@@ -30,24 +34,104 @@ error_t handle_repo(char* path) {
   if (OK == git_read(&git_status)) {
     color_print(COLOR_SUCCESS, "Success.\n");
   } else {
-    color_printf(COLOR_ERROR, "Error: failed to pull the git repo.\n  Repo at: %s\n",
+    color_printf(COLOR_ERROR,
+                 "Error: failed to pull the git repo.\n  Repo at: %s\n",
                  normalized_path);
   }
 
   return OK;
 }
 
-int main() {
-  char* repos[] = {
-      "~/Workspace/dotfiles",    "~/Workspace/vimrc", "~/Workspace/mlvm",
-      "~/Workspace/dockerfiles", "~/Workspace/notes",
+/*
+ * Takes actions on a list of repo.
+ */
+error_t handle_repo_list(char** repo_list, int repo_count) {
+  int i;
+  for (i = 0; i < repo_count; ++i) {
+    if (OK != handle_repo(repo_list[i])) return -1;
+  }
+  return OK;
+}
+
+error_t read_repo_list_from_config_file(char* config_path, char*** repo_list,
+                                        int* count, int max_count) {
+  char normalized_path[MAX_PATH_LEN];
+  if (OK != expand_tilde_path(config_path, normalized_path)) {
+    color_printf(COLOR_ERROR, "Error: not a valid path\n  Config File at: %s\n",
+                 config_path);
+    return -1;
+  }
+
+  fr_handle_t* handle;
+  if (OK != fr_open(&handle, normalized_path)) {
+    color_printf(COLOR_ERROR, "Failed to open config File at: %s\n",
+                 normalized_path);
+    return -2;
+  }
+
+  *count = 0;
+  *repo_list = malloc(max_count * sizeof(char*));
+
+  while ((*count) < max_count) {
+    char* line = malloc(MAX_PATH_LEN);
+    int len = fr_next_line(handle, line);
+    if (len == 0) {
+      free(line);
+      break;
+    }
+
+    if (len < 0) {
+      color_printf(COLOR_ERROR, "Failed to read config File at: %s\n",
+                   normalized_path);
+      fr_close(handle);
+      return -3;
+    }
+
+    (*repo_list)[(*count)++] = line;
+    printf("%s\n", line);
   };
 
-  int repo_count = sizeof(repos) / sizeof(char*);
-  int i;
+  if (*count == max_count) {
+    color_printf(COLOR_ERROR, "Too many lines in config File at: %s\n",
+                 normalized_path);
+    fr_close(handle);
+    return -3;
+  }
 
-  for (i = 0; i < repo_count; ++i) {
-    if (OK != handle_repo(repos[i])) return -1;
+  fr_close(handle);
+  return OK;
+};
+
+void free_repo_list(char** repo_list, int count) {
+  int i;
+  for (i = 0; i < count; i++) {
+    free(repo_list[i]);
+  }
+  free(repo_list);
+}
+
+int main() {
+  /* A golden list of repos for all machines. */
+  {
+    char* repos[] = {
+        "~/Workspace/dotfiles",    "~/Workspace/vimrc", "~/Workspace/mlvm",
+        "~/Workspace/dockerfiles", "~/Workspace/notes",
+    };
+
+    int repo_count = sizeof(repos) / sizeof(char*);
+    handle_repo_list(repos, repo_count);
+  }
+
+  /* A customized list of repos for local host. */
+  {
+    char** repos = NULL;
+    int repo_count;
+    if (read_repo_list_from_config_file("~/.git_repo_list", &repos, &repo_count,
+                                        /*max_count=*/50)) {
+      return -1;
+    }
+    handle_repo_list(repos, repo_count);
+    free_repo_list(repos, repo_count);
   }
 
   return 0;
