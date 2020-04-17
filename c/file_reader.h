@@ -26,7 +26,7 @@ typedef struct {
 } fr_handle_t;
 
 static error_t fr_load_next_buffer(fr_handle_t* handle) {
-  handle->pos_ = 0;
+  handle->pos_ = 0L;
   handle->allocated_ = read(handle->fd_, handle->buffer_, max_buffer_size_);
 
   if (handle->allocated_ == -1) return EREADFILE;
@@ -42,7 +42,7 @@ error_t fr_open(fr_handle_t** handle, char* path) {
 
   /* Allocate resources. */
   *handle = malloc(sizeof(fr_handle_t));
-  (*handle)->buffer_ = malloc(sizeof(max_buffer_size_));
+  (*handle)->buffer_ = malloc(max_buffer_size_ * sizeof(unsigned char));
 
   (*handle)->fd_ = fd;
   (*handle)->end_of_file_ = 0;
