@@ -31,6 +31,7 @@
 - For `Chrome`, disable `Notification` for all sites.
 - For `Chrome`, disable Save passwords for all sites.
 - For `Chrome`, set Page zoom to 90% if font size is large.
+- For `Chrome`, in `Show Full History`, use shift-click to clean history if needed.
 
 ### Other Tips
 
