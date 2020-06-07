@@ -134,6 +134,7 @@ int main() {
     char* repos[] = {
         "~/Workspace/dotfiles",    "~/Workspace/vimrc", "~/Workspace/mlvm",
         "~/Workspace/dockerfiles", "~/Workspace/notes", "~/Workspace/games",
+        "~/Workspace/fsx",
     };
 
     int repo_count = sizeof(repos) / sizeof(char*);
