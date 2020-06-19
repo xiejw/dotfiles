@@ -44,3 +44,7 @@ config apps
 config dotfiles
 config vimrc
 
+systemctl
+  systemctl --type=service --state=active list-units
+  systemctl status NetworkManager  # Find names via listing.
+  systemctl restart NetworkManager
