@@ -5,8 +5,11 @@
 - Golang: See [golang](doc/golang.md#install) doc for golang installation.
 - Compile:
 
+        mkdir -p ~/Workspace
         cd ~/Workspace/dotfiles
-        make
+        PATH=$PATH:/usr/local/go/bin make
+        # clean up the go pkg folder due to missing $GOPATH
+        rm -rf ~/go
 
 - Other dependencies:
 
