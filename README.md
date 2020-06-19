@@ -38,6 +38,7 @@ Link the file:
 
     ln -sf ~/Workspace/dotfiles/conf/tmux.conf ~/.tmux.conf
 
+- Install `ncurses-base` and `ncurses-term` on centos for `unsuitable terminal: screen-256color-bc` error.
 - See [here](doc/tmux.md#tmux-cheatsheet) for cheatsheet.
 - See [here](doc/tmux.md#install) for installing from source code.
 
