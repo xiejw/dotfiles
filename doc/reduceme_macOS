@@ -1,0 +1,10 @@
+chrome
+  clean the following folders
+    ~/Library/Application Support/Google/Chrome
+    /Library/Application\ Support/Google/Chrome/
+    rm ~/Library/Preferences/com.google.*
+    rm -rf ~/Library/Caches/com.google.*
+    rm -rf ~/Library/Google/*
+    rm -rf ~/Library/Caches/Google/*
+    ~/Library/Caches/Google/
+
