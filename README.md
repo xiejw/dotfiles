@@ -7,9 +7,7 @@
 
         mkdir -p ~/Workspace
         cd ~/Workspace/dotfiles
-        PATH=$PATH:/usr/local/go/bin make
-        # clean up the go pkg folder due to missing $GOPATH
-        rm -rf ~/go
+        CC=clang GOPATH=`mktemp-d` PATH=$PATH:/usr/local/go/bin make
 
 - Other dependencies:
 
