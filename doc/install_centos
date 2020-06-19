@@ -26,12 +26,17 @@ after install
       hostnamectl set-hostname <hostname>
 
 dnf
-  dnf check-update
-  dnf upgrade
-  dnf clean all
+  main cmds:
+    dnf check-update
+    dnf upgrade
+    dnf clean all
+
+  optional
+    clean old kernels: dnf remove $(dnf repoquery --installonly --latest-limit=-2 -q)
 
 config apps
   dnf install vim git wget tar make clang tmux ncurses-term
+    ncurses-term: needed for 256color mode for tmux
   EDITOR=vim git config --global -e
   ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
   copy ~/.ssh/id_rsa.pub to remote hosts
