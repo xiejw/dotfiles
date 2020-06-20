@@ -18,6 +18,8 @@ function prompt_command {
 
 if [[ "$HOSTNAME" =~ .*centos.* ]]; then
   export PROMPT_COMMAND_COLOR=32 # Green
+elif [[ "$HOSTNAME" =~ .*macbook.* ]]; then
+  export PROMPT_COMMAND_COLOR=36 # Cyan
 elif [[ "$HOSTNAME" =~ .*xiejw.* ]]; then
   export PROMPT_COMMAND_COLOR=35 # Magenta
 elif [[ "$HOSTNAME" =~ .*xieqi.* ]]; then
