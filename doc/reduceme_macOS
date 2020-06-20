@@ -8,3 +8,17 @@ chrome
     rm -rf ~/Library/Caches/Google/*
     ~/Library/Caches/Google/
 
+mozilla
+  ~/Library/Cache/Mozilla
+
+
+pip
+  ~/Library/Caches/pip/
+  du -h -d 2 /usr/local/lib/python3* | sort -n
+
+Apple Apps
+  XCode
+    ~/Library/Caches/com.apple.dt.Xcode
+  iMessage
+    delete all conversations (this will reduce ~/Library/Messages)
+
