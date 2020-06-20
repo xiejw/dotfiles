@@ -45,6 +45,14 @@ config dotfiles
 config vimrc
 
 systemctl
-  systemctl --type=service --state=active list-units
-  systemctl status NetworkManager  # Find names via listing.
-  systemctl restart NetworkManager
+  sudo dmesg --color=always | less -R
+  sudo systemctl disable kdump
+  journalctl
+  sudo systemctl list-units --failed
+  sudo systemctl --type=service --state=active list-units
+  sudo systemctl status NetworkManager  # Find names via listing.
+  sudo systemctl restart NetworkManager
+
+faq
+  boot log too fast
+    -> use quick time to record screen.
