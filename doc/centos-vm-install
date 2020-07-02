@@ -1,4 +1,5 @@
 install in virtual_vm
+
   memory 2048M
   ssd 20G
   network: add one more adapter: Adapter2/HostOnly
