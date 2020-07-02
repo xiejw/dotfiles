@@ -16,14 +16,14 @@ function prompt_command {
   export PS1="\n[\[\033[1;34m\]\w]\[\033[0m\]\n\[\033[1;${PROMPT_COMMAND_COLOR}m\]\u:\h\[\033[1;33m\] $(${DOTFILES}/bin/custom_prompt)-> \[\033[0m\]"
 }
 
-if [[ "$HOSTNAME" =~ .*centos.* ]]; then
+if [[ "$HOSTNAME" =~ .*vm.* ]]; then
+  export PROMPT_COMMAND_COLOR=33 # Yellow
+elif [[ "$HOSTNAME" =~ .*centos.* ]]; then
   export PROMPT_COMMAND_COLOR=32 # Green
 elif [[ "$HOSTNAME" =~ .*macbook.* ]]; then
   export PROMPT_COMMAND_COLOR=36 # Cyan
 elif [[ "$HOSTNAME" =~ .*xiejw.* ]]; then
   export PROMPT_COMMAND_COLOR=35 # Magenta
-elif [[ "$HOSTNAME" =~ .*xieqi.* ]]; then
-  export PROMPT_COMMAND_COLOR=33 # Yellow
 else
   export PROMPT_COMMAND_COLOR=36 # Cyan
 fi
