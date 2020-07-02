@@ -54,6 +54,23 @@ systemctl
   sudo systemctl status NetworkManager  # Find names via listing.
   sudo systemctl restart NetworkManager
 
+docker
+  sudo dnf config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+  sudo dnf repolist -v
+
+  # currently the docker-ce is broken on centos 8
+  # use the following two to find the version working.
+  sudo dnf list docker-ce --showduplicates | sort -r
+  sudo dnf install docker-ce --nobest
+
+  # block the bad versions.
+  sudo vim /etc/dnf/dnf.confo
+  exclude=docker-ce-3:19* docker-ce-3:18.09.[2-9]*
+
 faq
   boot log too fast
     -> use quick time to record screen.
+
+
