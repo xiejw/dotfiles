@@ -69,6 +69,11 @@ docker
   sudo vim /etc/dnf/dnf.confo
   exclude=docker-ce-3:19* docker-ce-3:18.09.[2-9]*
 
+  sudo systemctl start docker
+  sudo systemctl status docker
+  sudo systemctl enable docker
+  sudo usermod -aG docker $(whoami)
+
 faq
   boot log too fast
     -> use quick time to record screen.
