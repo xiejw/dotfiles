@@ -2,9 +2,9 @@
 #define DOTFILES_C_COLOR_PRINT_H_
 
 enum Color {
-  COLOR_INFO = 36,    /* Cyan */
-  COLOR_FYI = 33,     /* Yellow */
-  COLOR_ERROR = 31,   /* Red */
+  COLOR_INFO    = 36, /* Cyan */
+  COLOR_FYI     = 33, /* Yellow */
+  COLOR_ERROR   = 31, /* Red */
   COLOR_SUCCESS = 32, /* Green */
 };
 

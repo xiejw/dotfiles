@@ -17,16 +17,16 @@ static unsigned int max_line_len_ = 500;
 /* Opaque handle for line reading. */
 typedef struct {
   /* Internal fields. */
-  int fd_;
+  int            fd_;
   unsigned char* buffer_;
-  char end_of_file_;
+  char           end_of_file_;
 
   ssize_t pos_;
   ssize_t allocated_;
 } fr_handle_t;
 
 static error_t fr_load_next_buffer(fr_handle_t* handle) {
-  handle->pos_ = 0L;
+  handle->pos_       = 0L;
   handle->allocated_ = read(handle->fd_, handle->buffer_, max_buffer_size_);
 
   if (handle->allocated_ == -1) return EREADFILE;
@@ -41,13 +41,13 @@ error_t fr_open(fr_handle_t** handle, char* path) {
   }
 
   /* Allocate resources. */
-  *handle = malloc(sizeof(fr_handle_t));
+  *handle            = malloc(sizeof(fr_handle_t));
   (*handle)->buffer_ = malloc(max_buffer_size_ * sizeof(unsigned char));
 
-  (*handle)->fd_ = fd;
+  (*handle)->fd_          = fd;
   (*handle)->end_of_file_ = 0;
-  (*handle)->pos_ = 0;
-  (*handle)->allocated_ = 0;
+  (*handle)->pos_         = 0;
+  (*handle)->allocated_   = 0;
   return OK;
 }
 
@@ -73,8 +73,8 @@ int fr_next_line(fr_handle_t* handle, char* dst) {
    * max_line_len_.
    */
   unsigned char line[max_line_len_ + 1];
-  int current_len = 0;
-  int i;
+  int           current_len = 0;
+  int           i;
 
   if (handle->end_of_file_) return 0;
 

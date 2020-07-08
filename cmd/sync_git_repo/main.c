@@ -6,7 +6,7 @@
 #include "c/git.h"
 #include "c/path.h"
 
-#define MAX_PATH_LEN 100
+#define MAX_PATH_LEN   100
 #define MAX_REPO_COUNT 50
 
 /*
@@ -84,13 +84,13 @@ error_t read_repo_list_from_config_file(char* config_path, char*** repo_list,
     return EOPENFILE;
   }
 
-  *count = 0;
+  *count     = 0;
   *repo_list = malloc(max_count * sizeof(char*));
 
   error_t err = OK;
   while ((*count) < max_count) {
     char* line = malloc(MAX_PATH_LEN);
-    int len = fr_next_line(handle, line);
+    int   len  = fr_next_line(handle, line);
     if (len == 0) {
       free(line);
       break;
@@ -144,7 +144,7 @@ int main() {
   /* A customized list of repos for local host. */
   {
     char** repos = NULL;
-    int repo_count;
+    int    repo_count;
 
     if (OK != read_repo_list_from_config_file("~/.git_repo_list", &repos,
                                               &repo_count, MAX_REPO_COUNT))
