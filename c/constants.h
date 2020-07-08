@@ -1,0 +1,6 @@
+#ifndef DOTFILES_C_CONSTANTS_H_
+#define DOTFILES_C_CONSTANTS_H_
+
+#define MAX_PATH_LEN 100
+
+#endif

@@ -2,11 +2,11 @@
 #include <unistd.h>
 
 #include "c/color_print.h"
-#include "c/file_reader.h"
+#include "c/constants.h"
 #include "c/git.h"
 #include "c/path.h"
+#include "c/read_config_file.h"
 
-#define MAX_PATH_LEN   100
 #define MAX_REPO_COUNT 50
 
 /* Takes action on a single repo. */
@@ -58,72 +58,8 @@ error_t git_pull_repository_list(char** repo_list, int repo_count) {
   return OK;
 }
 
-/*
- * Reads the config file at `config_path`. Each line is a repo list for local
- * host.
- *
- * The repo_list should be free via `free_repo_list` later.
- */
-error_t read_repo_list_from_config_file(char* config_path, char*** repo_list,
-                                        int* count, int max_count) {
-  char normalized_path[MAX_PATH_LEN];
-  if (OK != expand_tilde_path(config_path, normalized_path)) {
-    color_printf(COLOR_ERROR, "Error: not a valid path\n  Config File at: %s\n",
-                 config_path);
-    return ENOTPATH;
-  }
-
-  /* If the config file is not present, just ignore it. */
-  if (OK != access(normalized_path, F_OK)) {
-    color_printf(COLOR_FYI, "Skip config file as not existed: %s\n",
-                 normalized_path);
-    *count = 0;
-    return OK;
-  }
-
-  fr_handle_t* handle;
-  if (OK != fr_open(&handle, normalized_path)) {
-    color_printf(COLOR_ERROR, "Failed to open config File at: %s\n",
-                 normalized_path);
-    return EOPENFILE;
-  }
-
-  *count     = 0;
-  *repo_list = malloc(max_count * sizeof(char*));
-
-  error_t err = OK;
-  while ((*count) < max_count) {
-    char* line = malloc(MAX_PATH_LEN);
-    int   len  = fr_next_line(handle, line);
-    if (len == 0) {
-      free(line);
-      break;
-    }
-
-    if (len < 0) {
-      color_printf(COLOR_ERROR, "Failed to read config File at: %s\n",
-                   normalized_path);
-      err = EREADFILE;
-      free(line);
-      break;
-    }
-
-    (*repo_list)[(*count)++] = line;
-  };
-
-  if (*count == max_count) {
-    color_printf(COLOR_ERROR, "Too many lines in config File at: %s\n",
-                 normalized_path);
-    err = EUNSPECIFIED;
-  }
-
-  fr_close(handle);
-  return err;
-};
-
 int main() {
-  /* A golden list of repos for all machines. */
-  {
+  { /* A golden list of repos for all machines. */
     char* repos[] = {
         /* clang-format off */
         "~/Workspace/vimrc",
@@ -140,8 +76,7 @@ int main() {
     if (OK != git_pull_repository_list(repos, repo_count)) return EUNSPECIFIED;
   }
 
-  /* A customized list of repos for local host. */
-  {
+  { /* A customized list of repos for local host. */
     char** repos = NULL;
     int    repo_count;
 
