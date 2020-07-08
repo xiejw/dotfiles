@@ -9,16 +9,22 @@
 #define MAX_PATH_LEN   100
 #define MAX_REPO_COUNT 50
 
-/*
- * Takes action on a single repo.
- */
-error_t handle_repo(char* path) {
+/* Takes action on a single repo. */
+error_t git_pull_repository(char* path) {
+  /* Step 1: normalize the git repository path. */
   char normalized_path[MAX_PATH_LEN];
   if (OK != expand_tilde_path(path, normalized_path)) {
     color_printf(COLOR_ERROR, "Error: not a valid path\n  Repo at: %s\n", path);
     return -1;
   }
 
+  /**********************************************************
+   * Note: After this point, all errors are not end-of-world.
+   * - log an error to alert user
+   * - move on (return OK).
+   */
+
+  /* Step 2: check existence and permission. */
   if (OK != access(normalized_path, F_OK)) {
     color_printf(COLOR_FYI, "Skip repository as not existed\n  Repo at: %s\n",
                  normalized_path);
@@ -43,13 +49,11 @@ error_t handle_repo(char* path) {
   return OK;
 }
 
-/*
- * Takes actions on a list of repo.
- */
-error_t handle_repo_list(char** repo_list, int repo_count) {
+/* Takes actions on a list of git repositories.  */
+error_t git_pull_repository_list(char** repo_list, int repo_count) {
   int i;
   for (i = 0; i < repo_count; ++i) {
-    if (OK != handle_repo(repo_list[i])) return -1;
+    if (OK != git_pull_repository(repo_list[i])) return -1;
   }
   return OK;
 }
@@ -144,7 +148,7 @@ int main() {
     };
 
     int repo_count = sizeof(repos) / sizeof(char*);
-    if (OK != handle_repo_list(repos, repo_count)) return EUNSPECIFIED;
+    if (OK != git_pull_repository_list(repos, repo_count)) return EUNSPECIFIED;
   }
 
   /* A customized list of repos for local host. */
@@ -156,7 +160,7 @@ int main() {
                                               &repo_count, MAX_REPO_COUNT))
       return EUNSPECIFIED;
 
-    if (OK != handle_repo_list(repos, repo_count)) return EUNSPECIFIED;
+    if (OK != git_pull_repository_list(repos, repo_count)) return EUNSPECIFIED;
 
     free_repo_list(repos, repo_count);
   }
