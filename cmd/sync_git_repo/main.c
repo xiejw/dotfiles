@@ -132,9 +132,15 @@ int main() {
   /* A golden list of repos for all machines. */
   {
     char* repos[] = {
-        "~/Workspace/dotfiles",    "~/Workspace/vimrc", "~/Workspace/mlvm",
-        "~/Workspace/dockerfiles", "~/Workspace/notes", "~/Workspace/games",
+        /* clang-format off */
+        "~/Workspace/vimrc",
+        "~/Workspace/dotfiles",
+        "~/Workspace/dockerfiles",
+        "~/Workspace/mlvm",
         "~/Workspace/fsx",
+        "~/Workspace/notes",
+        "~/Workspace/games",
+        /* clang-format on */
     };
 
     int repo_count = sizeof(repos) / sizeof(char*);
