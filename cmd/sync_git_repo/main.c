@@ -15,7 +15,7 @@ error_t git_pull_repository(char* path) {
   char normalized_path[MAX_PATH_LEN];
   if (OK != expand_tilde_path(path, normalized_path)) {
     color_printf(COLOR_ERROR, "Error: not a valid path\n  Repo at: %s\n", path);
-    return -1;
+    return EUNSPECIFIED;
   }
 
   /**********************************************************
@@ -53,7 +53,7 @@ error_t git_pull_repository(char* path) {
 error_t git_pull_repository_list(char** repo_list, int repo_count) {
   int i;
   for (i = 0; i < repo_count; ++i) {
-    if (OK != git_pull_repository(repo_list[i])) return -1;
+    if (OK != git_pull_repository(repo_list[i])) return EUNSPECIFIED;
   }
   return OK;
 }
@@ -121,17 +121,6 @@ error_t read_repo_list_from_config_file(char* config_path, char*** repo_list,
   return err;
 };
 
-/*
- * Frees repo_list and all resources in it.
- */
-void free_repo_list(char** repo_list, int count) {
-  int i;
-  for (i = 0; i < count; i++) {
-    free(repo_list[i]);
-  }
-  free(repo_list);
-}
-
 int main() {
   /* A golden list of repos for all machines. */
   {
@@ -162,7 +151,11 @@ int main() {
 
     if (OK != git_pull_repository_list(repos, repo_count)) return EUNSPECIFIED;
 
-    free_repo_list(repos, repo_count);
+    { /* frees the repo_list. */
+      int i;
+      for (i = 0; i < repo_count; i++) free(repos[i]);
+      free(repos);
+    }
   }
 
   return OK;
