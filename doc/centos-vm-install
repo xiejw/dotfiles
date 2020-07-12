@@ -35,6 +35,12 @@ dnf
   optional
     clean old kernels: dnf remove $(dnf repoquery --installonly --latest-limit=-2 -q)
 
+chrony
+  install chronyd
+  systemctl enable chronyd
+  systemctl status chronyd
+  timedatectl
+
 config apps
   dnf install vim git wget tar make clang tmux ncurses-term
     ncurses-term: needed for 256color mode for tmux
