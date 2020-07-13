@@ -40,6 +40,7 @@ chrony
   systemctl enable chronyd
   systemctl status chronyd
   timedatectl
+  sudo systemctl restart --now chronyd  # sync immediately
 
 config apps
   dnf install vim git wget tar make clang tmux ncurses-term
