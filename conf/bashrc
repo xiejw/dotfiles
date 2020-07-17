@@ -50,6 +50,9 @@ export GOPATH=~/.go_mod_cache  # At Go 1.11, GOPATH is used for mod cache.
 # Customized installed go place.
 export PATH=$PATH:/usr/local/go/bin
 
+# {{{1 Rust Related.
+export PATH="$HOME/.cargo/bin:$PATH"
+
 # {{{1 Shortcuts.
 # {{{2 Alias.
 alias less='less -i'
@@ -72,7 +75,6 @@ alias gs='git status -s'
 alias gd='git diff'
 alias gdd='git diff --cached'
 alias gm='git commit -am'
-## --recurse-submodules
 alias gp='git pull --rebase'
 alias gg='git log --graph --oneline --all'
 alias gpa='~/Workspace/dotfiles/bin/sync_git_repo'
@@ -100,10 +102,6 @@ alias v='vim'
 # {{{2 Clang
 export CC=clang
 export CXX=clang++
-
-# {{{2 CMake
-# In case cmake needs manual install due to version requirement.
-export PATH=~/Workspace/cmake-bin/bin:$PATH
 
 # {{{2 Brew
 export PATH=~/Workspace/homebrew/bin:$PATH

@@ -1,0 +1,3 @@
+install
+   use rustup
+   don't modify PATH
