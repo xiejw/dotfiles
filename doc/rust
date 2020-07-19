@@ -1,3 +1,4 @@
 install
    use rustup
+   curl https://sh.rustup.rs -sSf | sh -s -- --no-modify-path
    don't modify PATH
