@@ -35,8 +35,9 @@ mod env {
             let mut lines = std::str::from_utf8(&output.stdout).unwrap().lines();
             loop {
                 if let Some(line) = lines.next() {
-                    if line.len() >= 3 && line.starts_with("*") {
-                        return Some(line[2..].to_string());
+                    let line = line.as_bytes();
+                    if line.len() >= 3 && line[0] == b'*' {
+                        return Some(std::str::from_utf8(&line[2..]).unwrap().to_string());
                     }
                 }
                 break;
