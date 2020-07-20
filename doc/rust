@@ -1,5 +1,5 @@
 install
    use rustup
    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --no-modify-path
-   curl https://sh.rustup.rs -sSf | sh -s -- --no-modify-path
    don't modify PATH
+
