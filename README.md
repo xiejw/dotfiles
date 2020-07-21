@@ -2,12 +2,15 @@
 
 ## Install
 
-- Golang: See [golang](doc/golang.md#install) doc for golang installation.
+- Rust:
+```
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --no-modify-path
+```
 - Compile:
 
         mkdir -p ~/Workspace
         cd ~/Workspace/dotfiles
-        CC=clang GOPATH=`mktemp-d` PATH=$PATH:/usr/local/go/bin make
+        CC=clang make
 
 - Other dependencies:
 
