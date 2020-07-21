@@ -5,17 +5,20 @@ C_FMT=docker run --rm -ti \
         -v `pwd`:/workdir xiejw/clang-format \
         /clang-format.sh
 
-default: prompt sync_git_repo
+default: prompt sync_git_repo alias
 
 # {{{1 Actions.
 
 # {{{2 Projects.
 
 prompt:
-	rustc -o bin/$@ cmd/$@/main.rs
+	cargo build --release
 
 sync_git_repo:
-	${CC} -std=c89 -Wall -Werror -I. -o bin/$@ cmd/$@/main.c
+	mkdir -p bin && ${CC} -std=c89 -Wall -Werror -I. -o bin/$@ cmd/$@/main.c
+
+alias:
+	ln -sf ../target/release/prompt bin/prompt
 
 # {{{2 Maintenance.
 fmt:
@@ -23,5 +26,5 @@ fmt:
 	${C_FMT} cmd c
 
 clean:
-	rm -f bin/*
+	rm -rf bin && cargo clean
 

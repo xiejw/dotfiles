@@ -1,0 +1,7 @@
+[package]
+name = "dotfiles"
+version = "0.1.0"
+
+[[bin]]
+name = "prompt"
+path = "cmd/prompt/main.rs"
