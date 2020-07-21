@@ -18,10 +18,6 @@ mod env {
                     .output()
                     .expect("failed to execute process")
             };
-            println!(
-                "{}",
-                std::str::from_utf8(&output.stderr).unwrap().to_string()
-            );
             std::str::from_utf8(&output.stdout).unwrap().contains("vim")
         }
     }
@@ -89,5 +85,5 @@ fn main() {
     ))
     .unwrap();
 
-    println!("{}", &o);
+    print!("{}", &o);
 }

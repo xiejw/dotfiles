@@ -5,26 +5,21 @@ C_FMT=docker run --rm -ti \
         -v `pwd`:/workdir xiejw/clang-format \
         /clang-format.sh
 
-GO_FMT=gofmt -w -l
-
-default: custom_prompt sync_git_repo
+default: prompt sync_git_repo
 
 # {{{1 Actions.
 
 # {{{2 Projects.
 
-custom_prompt:
-	go build -o bin/$@ cmd/$@/main.go
+prompt:
+	rustc -o bin/$@ cmd/$@/main.rs
 
 sync_git_repo:
 	${CC} -std=c89 -Wall -Werror -I. -o bin/$@ cmd/$@/main.c
 
-# {{{2 Sync configurations.
-
 # {{{2 Maintenance.
 fmt:
-	${GO_FMT} cmd
-	${GO_FMT} go
+	rustfmt cmd/prompt/main.rs
 	${C_FMT} cmd c
 
 clean:
