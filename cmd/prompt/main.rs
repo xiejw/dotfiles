@@ -1,3 +1,5 @@
+use std::fmt::Write;
+
 mod env {
 
     pub mod vim {
@@ -48,10 +50,27 @@ mod env {
 }
 
 fn main() {
-    println!("vim runnning_in_bg: {}", env::vim::runnning_in_bg());
-    println!("git has_pending_files: {}", env::git::has_pending_files());
-    println!(
-        "git branch name: {}",
+    let mut o = String::new();
+    o.write_fmt(format_args!(
+        "git has_pending_files: {}\n",
+        env::git::has_pending_files()
+    ))
+    .unwrap();
+    o.write_fmt(format_args!(
+        "git branch name: {}\n",
         env::git::branch_name().unwrap_or("(empty)".to_string())
-    )
+    ))
+    .unwrap();
+
+    // Writes vim info.
+    o.write_fmt(format_args!(
+        "{}",
+        if env::vim::runnning_in_bg() {
+            "--vim-- "
+        } else {
+            ""
+        }
+    ))
+    .unwrap();
+    println!("{}", &o);
 }
