@@ -7,6 +7,9 @@ mod env {
 
         /// Checks whether vim is running in background.
         pub fn runnning_in_bg() -> bool {
+            // stdin is pipe for output. So, inherit is required to work with
+            // `-T`. For macOS, `-T` is needed as it will give all background
+            // vims otherwise.
             let output = if cfg!(target_os = "macos") {
                 Command::new("ps")
                     .arg("-T")
