@@ -7,9 +7,21 @@ mod env {
 
         /// Checks whether vim is running in background.
         pub fn runnning_in_bg() -> bool {
-            let output = Command::new("ps")
-                .output()
-                .expect("failed to execute process");
+            let output = if cfg!(target_os = "macos") {
+                Command::new("ps")
+                    .arg("-T")
+                    .stdin(std::process::Stdio::inherit())
+                    .output()
+                    .expect("failed to execute process")
+            } else {
+                Command::new("ps")
+                    .output()
+                    .expect("failed to execute process")
+            };
+            println!(
+                "{}",
+                std::str::from_utf8(&output.stderr).unwrap().to_string()
+            );
             std::str::from_utf8(&output.stdout).unwrap().contains("vim")
         }
     }
@@ -51,26 +63,31 @@ mod env {
 
 fn main() {
     let mut o = String::new();
-    o.write_fmt(format_args!(
-        "git has_pending_files: {}\n",
-        env::git::has_pending_files()
-    ))
-    .unwrap();
-    o.write_fmt(format_args!(
-        "git branch name: {}\n",
-        env::git::branch_name().unwrap_or("(empty)".to_string())
-    ))
-    .unwrap();
+
+    // Writes git info if under git repository.
+    if let Some(branch_name) = env::git::branch_name() {
+        o.write_fmt(format_args!(
+            "({}{}) ", // tailing space is important.
+            branch_name,
+            if env::git::has_pending_files() {
+                "*"
+            } else {
+                ""
+            },
+        ))
+        .unwrap();
+    }
 
     // Writes vim info.
     o.write_fmt(format_args!(
         "{}",
         if env::vim::runnning_in_bg() {
-            "--vim-- "
+            "--vim-- " // tailing space is important.
         } else {
             ""
         }
     ))
     .unwrap();
+
     println!("{}", &o);
 }
