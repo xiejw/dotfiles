@@ -2,6 +2,9 @@
 name = "dotfiles"
 version = "0.1.0"
 
+[dependencies]
+shellexpand = "2.0.0"
+
 [[bin]]
 name = "prompt"
 path = "cmd/prompt/main.rs"
