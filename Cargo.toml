@@ -5,3 +5,7 @@ version = "0.1.0"
 [[bin]]
 name = "prompt"
 path = "cmd/prompt/main.rs"
+
+[[bin]]
+name = "sync_git"
+path = "cmd/sync_git/main.rs"
