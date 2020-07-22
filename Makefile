@@ -22,7 +22,7 @@ alias:
 
 # {{{2 Maintenance.
 fmt:
-	rustfmt cmd/prompt/main.rs
+	cargo fmt
 	${C_FMT} cmd c
 
 clean:

@@ -1,9 +1,11 @@
 [package]
 name = "dotfiles"
 version = "0.1.0"
+edition = '2018'
 
 [dependencies]
 shellexpand = "2.0.0"
+colored = "2"
 
 [[bin]]
 name = "prompt"
