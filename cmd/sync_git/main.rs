@@ -1,7 +1,7 @@
 mod git {
+    use colored::Colorize;
     use std::path::Path;
-    use std::process::Command;
-    use colored::Colorize; // Pull traits for colors.
+    use std::process::Command; // Pull traits for colors.
 
     fn expand_path(path: &str) -> String {
         shellexpand::tilde(path).into_owned()
@@ -10,15 +10,23 @@ mod git {
     pub fn sync_repo(path: &str) -> Result<(), &'static str> {
         let normalized_path = expand_path(path);
 
-        if Path::new(&normalized_path).exists() {
-        }
+        if !Path::new(&normalized_path).exists() {
+            println!(
+                "{}",
+                format!(
+                    "Skip repository as not existed\n  Repo at: {}\n",
+                    normalized_path
+                )
+                .yellow()
+                .bold()
+            );
 
+            return Ok(());
+        }
 
         let mut cmd = Command::new("git");
         cmd.arg("pull").arg("--rebase");
         cmd.current_dir(&normalized_path);
-
-        println!("{}", format!("Pulling: {}", normalized_path).cyan().bold());
 
         if let Ok(mut child) = cmd.spawn() {
             let exit_result = child.wait();
@@ -38,8 +46,21 @@ mod git {
     }
 }
 
+use colored::Colorize; // Pull traits for colors.
+
 fn main() {
-    if let Err(err) = git::sync_repo("~/Workspace/dotfiles") {
-        println!("error {}", err)
+    let path = "~/Workspace/dotfiles";
+    println!("{}", format!("Pulling: {}", path).cyan().bold());
+
+    if let Err(err) = git::sync_repo(path) {
+        println!(
+            "{}",
+            format!(
+                "Error: failed to pull the git repo: {}\n  Repo at: {}\n",
+                err, path
+            )
+            .red()
+            .bold()
+        )
     }
 }
