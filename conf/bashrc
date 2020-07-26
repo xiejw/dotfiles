@@ -109,3 +109,8 @@ export QT_QPA_PLATFORM_PLUGIN_PATH=/Users/xiejw/Workspace/homebrew/opt/qt/plugin
 
 # {{{2 macOS
 export BASH_SILENCE_DEPRECATION_WARNING=1
+
+# {{{2 Fzf
+# 1. no `target` folder (rust).
+# 2. no hidden file.
+export FZF_DEFAULT_COMMAND='find . -type f -not -path "./target/*" -not -path "*/\.*"'
