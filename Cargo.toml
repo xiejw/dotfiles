@@ -3,14 +3,7 @@ name = "dotfiles"
 version = "0.1.0"
 edition = '2018'
 
-[dependencies]
-shellexpand = "2.0.0"
-colored = "2"
-
 [[bin]]
 name = "prompt"
 path = "cmd/prompt/main.rs"
 
-[[bin]]
-name = "sync_git"
-path = "cmd/sync_git/main.rs"
