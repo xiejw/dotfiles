@@ -1,6 +1,7 @@
-#ifndef DOTFILES_C_CONSTANTS_H_
-#define DOTFILES_C_CONSTANTS_H_
+#ifndef CONSTANTS_H_
+#define CONSTANTS_H_
 
-#define MAX_PATH_LEN 100
+// System level constants.
+#define MAX_PATH_LEN 100  // Maximum path string length.
 
 #endif
