@@ -84,8 +84,8 @@ int main() {
     char** repos = NULL;
     int    repo_count;
 
-    if (OK != read_repo_list_from_config_file("~/.git_repo_list", &repos,
-                                              &repo_count, MAX_REPO_COUNT))
+    if (OK != readRepoListFromConfig("~/.git_repo_list", &repos, &repo_count,
+                                     MAX_REPO_COUNT))
       return EUNSPECIFIED;
 
     if (OK != gitPullRepos(repos, repo_count)) return EUNSPECIFIED;
