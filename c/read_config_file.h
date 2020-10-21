@@ -38,7 +38,7 @@ error_t readRepoListFromConfig(char* config_path, char*** repo_list, int* count,
   // --------------------------------------------------------------------------
   // Step 3: read the file line by line.
   fr_handle_t* handle;
-  if (OK != fr_open(&handle, normalized_path)) {
+  if (OK != frOpen(&handle, normalized_path)) {
     cPrintf(COLOR_ERROR, "Failed to open config File at: %s\n",
             normalized_path);
     return EOPENFILE;
@@ -49,7 +49,7 @@ error_t readRepoListFromConfig(char* config_path, char*** repo_list, int* count,
   error_t err = OK;
   while ((*count) < max_count) {
     char* line = malloc(MAX_PATH_LEN);
-    int   len  = fr_next_line(handle, line);
+    int   len  = frNextLine(handle, line);
     if (len == 0) {
       free(line);
       break;
@@ -72,7 +72,7 @@ error_t readRepoListFromConfig(char* config_path, char*** repo_list, int* count,
     err = EUNSPECIFIED;
   }
 
-  fr_close(handle);
+  frClose(handle);
   return err;
 }
 
