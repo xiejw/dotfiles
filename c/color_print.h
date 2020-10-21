@@ -16,17 +16,17 @@ enum Color {
 /* Prints the message with color.
  *
  * Due to the limitation of variadic macro, if no argument is provided, use
- * `color_print`.
+ * `cPrint`.
  *
- *     color_printf(COLOR_FYI, "Processing %s...\n", item_name);
- *     color_print(COLOR_FYI, "Processing ...\n");
+ *     cPrintf(COLOR_FYI, "Processing %s...\n", item_name);
+ *     cPrint(COLOR_FYI, "Processing ...\n");
  *
  * Flush is needed to ensure the color reset applied in place immediately. */
-#define color_printf(c, fmt, ...)                     \
+#define cPrintf(c, fmt, ...)                          \
   printf("\033[1;%dm" fmt "\033[0m", c, __VA_ARGS__); \
   fflush(stdout)
 
-#define color_print(c, msg)              \
+#define cPrint(c, msg)                   \
   printf("\033[1;%dm" msg "\033[0m", c); \
   fflush(stdout)
 

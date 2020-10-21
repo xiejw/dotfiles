@@ -15,7 +15,7 @@ error_t gitPull(char* path) {
   // Step 1: normalize the git repository path.
   char normalized_path[MAX_PATH_LEN];
   if (OK != expand_tilde_path(path, normalized_path)) {
-    color_printf(COLOR_ERROR, "Error: not a valid path\n  Repo at: %s\n", path);
+    cPrintf(COLOR_ERROR, "Error: not a valid path\n  Repo at: %s\n", path);
     return EUNSPECIFIED;
   }
 
@@ -25,24 +25,23 @@ error_t gitPull(char* path) {
   // ---------------------------------------------------------------------------
   // Step 2: check existence and permission.
   if (OK != access(normalized_path, F_OK)) {
-    color_printf(COLOR_FYI, "Skip repository as not existed\n  Repo at: %s\n",
-                 normalized_path);
+    cPrintf(COLOR_FYI, "Skip repository as not existed\n  Repo at: %s\n",
+            normalized_path);
     return OK;
   }
 
   // ---------------------------------------------------------------------------
   // Step 3: pull repository.
-  color_printf(COLOR_INFO, "Pulling: %s\n", normalized_path);
+  cPrintf(COLOR_INFO, "Pulling: %s\n", normalized_path);
 
   git_status_t status;
   status.path = normalized_path;  // Lifetime s same as normalized_path.
 
   if (OK == gitReadStatus(&status)) {
-    color_print(COLOR_SUCCESS, "Success.\n");
+    cPrint(COLOR_SUCCESS, "Success.\n");
   } else {
-    color_printf(COLOR_ERROR,
-                 "Error: failed to pull the git repo.\n  Repo at: %s\n",
-                 normalized_path);
+    cPrintf(COLOR_ERROR, "Error: failed to pull the git repo.\n  Repo at: %s\n",
+            normalized_path);
   }
 
   return OK;
