@@ -72,6 +72,6 @@ error_t read_repo_list_from_config_file(char* config_path, char*** repo_list,
 
   fr_close(handle);
   return err;
-};
+}
 
 #endif
