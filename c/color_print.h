@@ -1,29 +1,27 @@
-#ifndef DOTFILES_C_COLOR_PRINT_H_
-#define DOTFILES_C_COLOR_PRINT_H_
+#ifndef COLOR_PRINT_H_
+#define COLOR_PRINT_H_
+
+#define COLOR_RED    31
+#define COLOR_GREEN  32
+#define COLOR_YELLOW 33
+#define COLOR_CYAN   36
 
 enum Color {
-  COLOR_INFO    = 36, /* Cyan */
-  COLOR_FYI     = 33, /* Yellow */
-  COLOR_ERROR   = 31, /* Red */
-  COLOR_SUCCESS = 32, /* Green */
+  COLOR_INFO    = COLOR_CYAN,
+  COLOR_FYI     = COLOR_YELLOW,
+  COLOR_ERROR   = COLOR_RED,
+  COLOR_SUCCESS = COLOR_GREEN,
 };
 
-/*
- * Prints the message with color.
+/* Prints the message with color.
  *
  * Due to the limitation of variadic macro, if no argument is provided, use
  * `color_print`.
  *
- * Usage:
+ *     color_printf(COLOR_FYI, "Processing %s...\n", item_name);
+ *     color_print(COLOR_FYI, "Processing ...\n");
  *
- * ```
- * color_printf(COLOR_FYI, "Processing %s...\n", item_name);
- *
- * color_print(COLOR_FYI, "Processing ...\n");
- * ```
- *
- * Flush is needed to ensure the color reset applied in place immediately.
- */
+ * Flush is needed to ensure the color reset applied in place immediately. */
 #define color_printf(c, fmt, ...)                     \
   printf("\033[1;%dm" fmt "\033[0m", c, __VA_ARGS__); \
   fflush(stdout)
