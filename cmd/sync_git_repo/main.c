@@ -37,7 +37,7 @@ error_t gitPull(char* path) {
   git_status_t status;
   status.path = normalized_path;  // Lifetime s same as normalized_path.
 
-  if (OK == git_read(&status)) {
+  if (OK == gitReadStatus(&status)) {
     color_print(COLOR_SUCCESS, "Success.\n");
   } else {
     color_printf(COLOR_ERROR,
