@@ -5,6 +5,8 @@ C_FMT=docker run --rm -ti \
         -v `pwd`:/workdir xiejw/clang-format \
         /clang-format.sh
 
+CFLAGS=-std=c99 -Wall -Werror -Wno-c11-extensions ${CLAGS}
+
 default: prompt sync_git_repo alias
 
 # {{{1 Actions.
@@ -15,7 +17,7 @@ prompt:
 	cargo build --release
 
 sync_git_repo:
-	mkdir -p bin && ${CC} -std=c89 -Wall -Werror -I. -o bin/$@ cmd/$@/main.c
+	mkdir -p bin && ${CC}  -I. -o bin/$@ cmd/$@/main.c
 
 alias:
 	ln -sf ../target/release/prompt bin/prompt

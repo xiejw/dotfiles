@@ -9,36 +9,35 @@
 
 #define MAX_REPO_COUNT 50
 
-/* Takes action on a single repo. */
-error_t git_pull_repository(char* path) {
-  /* Step 1: normalize the git repository path. */
+// Invokes git pull for the repo @ `path`.
+error_t gitPull(char* path) {
+  // ---------------------------------------------------------------------------
+  // Step 1: normalize the git repository path.
   char normalized_path[MAX_PATH_LEN];
   if (OK != expand_tilde_path(path, normalized_path)) {
     color_printf(COLOR_ERROR, "Error: not a valid path\n  Repo at: %s\n", path);
     return EUNSPECIFIED;
   }
 
-  /**********************************************************
-   * Note: After this point, all errors are not end-of-world.
-   * - log an error to alert user
-   * - move on (return OK).
-   */
+  // Note: After this point, all errors are not end-of-world. So, log an error
+  // to alert user and  move on (return OK).
 
-  /* Step 2: check existence and permission. */
+  // ---------------------------------------------------------------------------
+  // Step 2: check existence and permission.
   if (OK != access(normalized_path, F_OK)) {
     color_printf(COLOR_FYI, "Skip repository as not existed\n  Repo at: %s\n",
                  normalized_path);
     return OK;
   }
 
+  // ---------------------------------------------------------------------------
+  // Step 3: pull repository.
   color_printf(COLOR_INFO, "Pulling: %s\n", normalized_path);
 
-  git_status_t git_status;
-  /* Life time of git_status is same as normalized_path. */
-  git_status.path = normalized_path;
+  git_status_t status;
+  status.path = normalized_path;  // Lifetime s same as normalized_path.
 
-  /* For any `git_read` failure, we just log them. return value is zero. */
-  if (OK == git_read(&git_status)) {
+  if (OK == git_read(&status)) {
     color_print(COLOR_SUCCESS, "Success.\n");
   } else {
     color_printf(COLOR_ERROR,
@@ -50,16 +49,18 @@ error_t git_pull_repository(char* path) {
 }
 
 /* Takes actions on a list of git repositories.  */
-error_t git_pull_repository_list(char** repo_list, int repo_count) {
-  int i;
-  for (i = 0; i < repo_count; ++i) {
-    if (OK != git_pull_repository(repo_list[i])) return EUNSPECIFIED;
+error_t gitPullRepos(char** repo_list, int repo_count) {
+  for (int i = 0; i < repo_count; ++i) {
+    if (OK != gitPull(repo_list[i])) return EUNSPECIFIED;
   }
   return OK;
 }
 
 int main() {
-  { /* A golden list of repos for all machines. */
+  {
+    // ----------------------------------------
+    // A golden list of repos for all machines.
+    // ----------------------------------------
     char* repos[] = {
         /* clang-format off */
         "~/Workspace/vimrc",
@@ -73,10 +74,13 @@ int main() {
     };
 
     int repo_count = sizeof(repos) / sizeof(char*);
-    if (OK != git_pull_repository_list(repos, repo_count)) return EUNSPECIFIED;
+    if (OK != gitPullRepos(repos, repo_count)) return EUNSPECIFIED;
   }
 
-  { /* A customized list of repos for local host. */
+  { /* . */
+    // ----------------------------------------
+    // A customized list of repos for local.
+    // ----------------------------------------
     char** repos = NULL;
     int    repo_count;
 
@@ -84,11 +88,10 @@ int main() {
                                               &repo_count, MAX_REPO_COUNT))
       return EUNSPECIFIED;
 
-    if (OK != git_pull_repository_list(repos, repo_count)) return EUNSPECIFIED;
+    if (OK != gitPullRepos(repos, repo_count)) return EUNSPECIFIED;
 
     { /* frees the repo_list. */
-      int i;
-      for (i = 0; i < repo_count; i++) free(repos[i]);
+      for (int i = 0; i < repo_count; i++) free(repos[i]);
       free(repos);
     }
   }
