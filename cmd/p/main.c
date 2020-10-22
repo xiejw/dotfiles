@@ -47,8 +47,11 @@ main (void)
     {
       /* This is the child process.
          Close other end first. */
-      close (mypipe[1]);
-      read_from_pipe (mypipe[0]);
+      close (mypipe[0]);
+      dup2(mypipe[1], 1);
+      char* grep_args[] = {"-lh", NULL};
+      printf("==launch ls");
+      execvp("ls", grep_args);
       return EXIT_SUCCESS;
     }
   else if (pid < (pid_t) 0)
@@ -61,8 +64,8 @@ main (void)
     {
       /* This is the parent process.
          Close other end first. */
-      close (mypipe[0]);
-      write_to_pipe (mypipe[1]);
+      close (mypipe[1]);
+      read_from_pipe (mypipe[0]);
       return EXIT_SUCCESS;
     }
 }
