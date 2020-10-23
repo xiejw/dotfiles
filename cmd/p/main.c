@@ -10,29 +10,20 @@
 #define YES 1
 #define NO  0
 
+// all fns return YES/NO or error codes (neg number).
 int vimRunInBg();
 int gitPending();
 int gitBranceName(char*);
 
 int main(void) {
-  if (YES == vimRunInBg()) {
-    cPrint(COLOR_ERROR, "v\n");
-  } else {
-    cPrint(COLOR_ERROR, "vn\n");
-  }
-
-  if (YES == gitPending()) {
-    cPrint(COLOR_ERROR, "g\n");
-  } else {
-    cPrint(COLOR_ERROR, "gn\n");
-  }
-
   char name[100];
   if (YES == gitBranceName(name)) {
-    cPrintf(COLOR_ERROR, "b: %s\n", name);
-  } else {
-    cPrint(COLOR_ERROR, "bn\n");
+    printf("(%s", name);
+    if (YES == gitPending()) printf("*");
+    printf(") ");
   }
+  if (YES == vimRunInBg()) printf("--vim-- ");
+  fflush(stdout);
 }
 
 // ----------------------------------------------------------------------------
