@@ -1,6 +1,7 @@
 #ifndef EXEC_H
 #define EXEC_H
 
+#include <fcntl.h>      // open
 #include <sys/types.h>  // pid_t
 #include <unistd.h>
 
@@ -26,6 +27,8 @@ int execCmd(char **cmd) {
     // This is the child process. Close the reading end.
     close(mypipe[0]);
     dup2(mypipe[1], STDOUT_FILENO);
+    dup2(open("/dev/null", O_RDWR), STDERR_FILENO);  // Slience stderr.
+
     execvp(cmd[0], cmd);
     return 0;  // never reached.
   } else if (pid < (pid_t)0) {
