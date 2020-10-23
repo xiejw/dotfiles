@@ -7,29 +7,22 @@ C_FMT=docker run --rm -ti \
 
 CFLAGS=-std=c99 -Wall -Werror -pedantic -Wno-c11-extensions ${CLAGS}
 
-default: prompt sync_git_repo alias
+default: prompt sync_git_repo
 
 # {{{1 Actions.
 
 # {{{2 Projects.
 
 prompt:
-	cargo build --release
+	mkdir -p bin && ${CC} ${CFLAGS} -I. -o bin/$@ cmd/$@/main.c
 
 sync_git_repo:
 	mkdir -p bin && ${CC} ${CFLAGS} -I. -o bin/$@ cmd/$@/main.c
 
-p:
-	mkdir -p bin && ${CC} ${CFLAGS} -I. -o bin/$@ cmd/$@/main.c
-
-alias:
-	ln -sf ../target/release/prompt bin/prompt
-
 # {{{2 Maintenance.
 fmt:
-	cargo fmt
 	${C_FMT} cmd c
 
 clean:
-	rm -rf bin && cargo clean
+	rm -rf bin
 

@@ -1,9 +1,0 @@
-[package]
-name = "dotfiles"
-version = "0.1.0"
-edition = '2018'
-
-[[bin]]
-name = "prompt"
-path = "cmd/prompt/main.rs"
-
