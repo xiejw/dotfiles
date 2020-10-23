@@ -11,5 +11,7 @@ typedef int error_t;
 #define EOPENFILE       -5  // Failure during opening file.
 #define EREADFILE       -6  // Failure during reading file.
 #define ELINELEN        -7  // Line is too long.
+#define EPIPEFAIL       -8  // Pipe failed.
+#define EFORKFAIL       -9  // Fork failed.
 
 #endif
