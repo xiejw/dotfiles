@@ -7,7 +7,55 @@
 #include "c/path.h"
 #include "c/read_config_file.h"
 
+// ----------------------------------------------------------------------------
+// Prototype.
+// ----------------------------------------------------------------------------
+
 #define MAX_REPO_COUNT 50
+
+error_t gitPullRepos(char** repo_list, int repo_count);
+void    freeRepoList(char** repos, int repo_count);
+
+int main() {
+  {
+    // ----------------------------------------
+    // A golden list of repos for all machines.
+    // ----------------------------------------
+    char* repos[] = {
+        /* clang-format off */
+        "~/Workspace/vimrc",
+        "~/Workspace/dotfiles",
+        "~/Workspace/dockerfiles",
+        "~/Workspace/mlvm",
+        "~/Workspace/fsx",
+        "~/Workspace/notes",
+        "~/Workspace/games",
+        /* clang-format on */
+    };
+
+    int repo_count = sizeof(repos) / sizeof(char*);
+    if (OK != gitPullRepos(repos, repo_count)) return EUNSPECIFIED;
+  }
+  {
+    // ----------------------------------------
+    // A customized list of repos for local.
+    // ----------------------------------------
+    char** repos = NULL;
+    int    repo_count;
+    if (OK != readRepoListFromConfig("~/.git_repo_list", &repos, &repo_count,
+                                     MAX_REPO_COUNT))
+      return EUNSPECIFIED;
+
+    if (OK != gitPullRepos(repos, repo_count)) return EUNSPECIFIED;
+    freeRepoList(repos, repo_count);
+  }
+
+  return OK;
+}
+
+// ----------------------------------------------------------------------------
+// Implementation.
+// ----------------------------------------------------------------------------
 
 // Invokes git pull for the repo @ `path`.
 error_t gitPull(char* path) {
@@ -55,45 +103,7 @@ error_t gitPullRepos(char** repo_list, int repo_count) {
   return OK;
 }
 
-int main() {
-  {
-    // ----------------------------------------
-    // A golden list of repos for all machines.
-    // ----------------------------------------
-    char* repos[] = {
-        /* clang-format off */
-        "~/Workspace/vimrc",
-        "~/Workspace/dotfiles",
-        "~/Workspace/dockerfiles",
-        "~/Workspace/mlvm",
-        "~/Workspace/fsx",
-        "~/Workspace/notes",
-        "~/Workspace/games",
-        /* clang-format on */
-    };
-
-    int repo_count = sizeof(repos) / sizeof(char*);
-    if (OK != gitPullRepos(repos, repo_count)) return EUNSPECIFIED;
-  }
-
-  { /* . */
-    // ----------------------------------------
-    // A customized list of repos for local.
-    // ----------------------------------------
-    char** repos = NULL;
-    int    repo_count;
-
-    if (OK != readRepoListFromConfig("~/.git_repo_list", &repos, &repo_count,
-                                     MAX_REPO_COUNT))
-      return EUNSPECIFIED;
-
-    if (OK != gitPullRepos(repos, repo_count)) return EUNSPECIFIED;
-
-    { /* frees the repo_list. */
-      for (int i = 0; i < repo_count; i++) free(repos[i]);
-      free(repos);
-    }
-  }
-
-  return OK;
+void freeRepoList(char** repos, int repo_count) {
+  for (int i = 0; i < repo_count; i++) free(repos[i]);
+  free(repos);
 }

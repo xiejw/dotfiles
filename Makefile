@@ -5,7 +5,7 @@ C_FMT=docker run --rm -ti \
         -v `pwd`:/workdir xiejw/clang-format \
         /clang-format.sh
 
-CFLAGS=-std=c99 -Wall -Werror -pedantic -Wno-c11-extensions ${CLAGS}
+CFLAGS=-std=c99 -O2 -Wall -Werror -pedantic -Wno-c11-extensions ${CLAGS}
 
 default: prompt sync_git_repo
 
