@@ -1,6 +1,8 @@
 #ifndef COLOR_PRINT_H_
 #define COLOR_PRINT_H_
 
+#include <stdio.h>
+
 #define COLOR_RED    31
 #define COLOR_GREEN  32
 #define COLOR_YELLOW 33

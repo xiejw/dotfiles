@@ -25,6 +25,7 @@ typedef struct {
 } fr_handle_t;
 
 error_t frOpen(fr_handle_t** handle, char* path);
+error_t frDOpen(fr_handle_t** handle, int fd);
 void    frClose(fr_handle_t* handle);
 int     frNextLine(fr_handle_t* handle, char* dst);
 
@@ -40,7 +41,10 @@ static error_t _frLoadNextBuf(fr_handle_t* handle);
 error_t frOpen(fr_handle_t** handle, char* path) {
   int fd = open(path, O_RDONLY);
   if (fd == -1) return EOPENFILE;
+  return frDOpen(handle, fd);
+}
 
+error_t frDOpen(fr_handle_t** handle, int fd) {
   // Allocate resources.
   *handle            = malloc(sizeof(fr_handle_t));
   (*handle)->buffer_ = malloc(max_buffer_size_ * sizeof(unsigned char));

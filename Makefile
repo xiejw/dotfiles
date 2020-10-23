@@ -19,6 +19,9 @@ prompt:
 sync_git_repo:
 	mkdir -p bin && ${CC} ${CFLAGS} -I. -o bin/$@ cmd/$@/main.c
 
+p:
+	mkdir -p bin && ${CC} ${CFLAGS} -I. -o bin/$@ cmd/$@/main.c
+
 alias:
 	ln -sf ../target/release/prompt bin/prompt
 
