@@ -26,9 +26,10 @@ int main() {
         "~/Workspace/vimrc",
         "~/Workspace/dotfiles",
         "~/Workspace/dockerfiles",
-        "~/Workspace/mlvm",
-        "~/Workspace/fsx",
         "~/Workspace/notes",
+        "~/Workspace/mlvm",
+        "~/Workspace/dsa",
+        "~/Workspace/fsx",
         "~/Workspace/games",
         /* clang-format on */
     };
