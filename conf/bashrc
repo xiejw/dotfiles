@@ -64,6 +64,8 @@ alias vv='vim -c ":call fns#LoadPendingFiles()"'
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   alias ls='ls --color'
+elif [[ "$OSTYPE" == "freebsd"* ]]; then
+  alias ls='ls -G'
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   alias ls='ls -G'
 fi
@@ -91,10 +93,17 @@ alias d='docker'
 alias dr='docker run --rm -ti -v `pwd`:/source'
 
 # {{{2 Make.
-alias m='make'
-alias mf='make fmt'
-alias mt='make test'
-alias mtv='make VERBOSE=1 test'
+if [[ "$OSTYPE" == "freebsd"* ]]; then
+  alias m='gmake'
+  alias mf='gmake fmt'
+  alias mt='gmake test'
+  alias mtv='gmake VERBOSE=1 test'
+else
+  alias m='make'
+  alias mf='make fmt'
+  alias mt='make test'
+  alias mtv='make VERBOSE=1 test'
+fi
 
 # {{{2 Vim.
 alias v='vim'
