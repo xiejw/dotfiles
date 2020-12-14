@@ -28,6 +28,7 @@ int main() {
         "~/Workspace/dockerfiles",
         "~/Workspace/notes",
         "~/Workspace/mlvm",
+        "~/Workspace/eva",
         "~/Workspace/dsa",
         "~/Workspace/fsx",
         "~/Workspace/games",
