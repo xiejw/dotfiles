@@ -29,7 +29,6 @@ int main() {
         "~/Workspace/notes",
         "~/Workspace/mlvm",
         "~/Workspace/eva",
-        "~/Workspace/dsa",
         "~/Workspace/fsx",
         "~/Workspace/games",
         /* clang-format on */
