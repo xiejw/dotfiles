@@ -50,9 +50,6 @@ export GOPATH=~/.go_mod_cache  # At Go 1.11, GOPATH is used for mod cache.
 # Customized installed go place.
 export PATH=$PATH:/usr/local/go/bin
 
-# {{{1 Rust Related.
-export PATH="$HOME/.cargo/bin:$PATH"
-
 # {{{1 Shortcuts.
 # {{{2 Alias.
 alias less='less -i'
@@ -112,10 +109,6 @@ alias v='vim'
 export CC=clang
 export CXX=clang++
 
-# {{{2 Brew
-export PATH=~/Workspace/homebrew/bin:$PATH
-export QT_QPA_PLATFORM_PLUGIN_PATH=/Users/xiejw/Workspace/homebrew/opt/qt/plugins/
-
 # {{{2 macOS
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
@@ -125,3 +118,10 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 # 3. no bin folder
 # 4. no build folder
 export FZF_DEFAULT_COMMAND='find . -type f -not -path "./target/*" -not -path "*/\.*" -not -path "./bin/*" -not -path "./build/*"'
+
+# experimental.
+# put local brew path into PATH.
+export PATH=~/Workspace/homebrew/bin:$PATH
+# put local llvm bins into PATH, e.g., clang-format on FreeBSD
+export PATH=$PATH:/llvm/build/bin/
+
