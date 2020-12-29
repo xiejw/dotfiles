@@ -27,10 +27,10 @@ int main() {
         "~/Workspace/dotfiles",
         "~/Workspace/dockerfiles",
         "~/Workspace/notes",
-        "~/Workspace/mlvm",
         "~/Workspace/eva",
-        "~/Workspace/fsx",
         "~/Workspace/games",
+        "~/Workspace/mlvm",
+        "~/Workspace/fsx",
         /* clang-format on */
     };
 
