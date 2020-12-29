@@ -30,7 +30,6 @@ int main() {
         "~/Workspace/eva",
         "~/Workspace/games",
         "~/Workspace/mlvm",
-        "~/Workspace/fsx",
         /* clang-format on */
     };
 
