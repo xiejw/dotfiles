@@ -105,6 +105,9 @@ fi
 # {{{2 Vim.
 alias v='vim'
 
+# short cut for ~/Workspace
+alias w='cd ~/Workspace'
+
 # {{{2 Clang
 export CC=clang
 export CXX=clang++
