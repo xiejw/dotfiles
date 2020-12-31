@@ -8,26 +8,13 @@
         cd ~/Workspace/dotfiles
         CC=clang make
 
-- Other dependencies:
-
-        [macOS] brew install ctags urlview graphviz
-        [ubuntu] sudo apt-get install exuberant-ctags urlview graphviz
-
 ## Bashrc
 
-Append the following block at the end of `~/.bashrc`, `~/.bash_profile`, or
-`~/.profile`.
+Append the following block at the end of `~/.profile`.
 
     # Customized
     export DOTFILES=~/Workspace/dotfiles
     source ~/Workspace/dotfiles/conf/bashrc
-
-## Kitty
-
-    mkdir -p  ~/.config/kitty
-    rm ~/.config/kitty/kitty.conf
-    ln -sf ~/Workspace/dotfiles/conf/kitty.conf ~/.config/kitty/kitty.conf
-    ln -sf ~/Workspace/dotfiles/conf/zoom_toggle.py ~/.config/kitty/
 
 ## Tmux
 
@@ -38,6 +25,13 @@ Link the file:
 - Install `ncurses-base` and `ncurses-term` on centos for `unsuitable terminal: screen-256color-bc` error.
 - See [here](doc/tmux.md#tmux-cheatsheet) for cheatsheet.
 - See [here](doc/tmux.md#install) for installing from source code.
+
+## Kitty
+
+    mkdir -p  ~/.config/kitty
+    rm ~/.config/kitty/kitty.conf
+    ln -sf ~/Workspace/dotfiles/conf/kitty.conf ~/.config/kitty/kitty.conf
+    ln -sf ~/Workspace/dotfiles/conf/zoom_toggle.py ~/.config/kitty/
 
 # Configuration for Daily Tools
 
