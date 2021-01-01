@@ -106,7 +106,13 @@ fi
 alias v='vim'
 
 # short cut for ~/Workspace
-alias w='cd ~/Workspace'
+function w {
+  if [[ $# -eq 1 ]]; then
+   cd ~/Workspace/$1
+ else
+   cd ~/Workspace
+ fi
+}
 
 # {{{2 Clang
 export CC=clang
