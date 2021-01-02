@@ -33,12 +33,6 @@ Link the file:
     ln -sf ~/Workspace/dotfiles/conf/kitty.conf ~/.config/kitty/kitty.conf
     ln -sf ~/Workspace/dotfiles/conf/zoom_toggle.py ~/.config/kitty/
 
-# Configuration for Daily Tools
-
-## Brew (macOS)
-
-- See [here](doc/brew.md).
-
 ## XMonad
 
 - See [manpage](https://xmonad.org/manpage.html) for default key bindings.
