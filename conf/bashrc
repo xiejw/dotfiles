@@ -39,15 +39,21 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   fi
 fi
 
-# Added make installed by brew for MacOS.
+# ------------------------------------------------------------------------------
+# brew
+# ------------------------------------------------------------------------------
+
+# Added make installed by brew for macOS.
 export PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
 
-# {{{3 Brew bash completion for Mac OS.
+# brew bash completion for macOS.
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
-# {{{1 Golang Related.
+# ------------------------------------------------------------------------------
+# golang
+# ------------------------------------------------------------------------------
 export GOPATH=~/.go_mod_cache  # At Go 1.11, GOPATH is used for mod cache.
-# Customized installed go place.
+# customized installed go place.
 export PATH=$PATH:/usr/local/go/bin
 
 # {{{1 Shortcuts.
@@ -118,6 +124,9 @@ function w {
 # {{{2 Clang
 export CC=clang
 export CXX=clang++
+# For clang compiled from source, SDKROOT is needed to provide sdk path for
+# include. man xcrun and search for SDKROOT.
+export SDKROOT=`xcrun --sdk macosx --show-sdk-path`
 
 # {{{2 macOS
 export BASH_SILENCE_DEPRECATION_WARNING=1
