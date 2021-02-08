@@ -127,6 +127,7 @@ export CXX=clang++
 # For clang compiled from source, SDKROOT is needed to provide sdk path for
 # include. man xcrun and search for SDKROOT.
 export SDKROOT=`xcrun --sdk macosx --show-sdk-path`
+export PATH=/Users/xiejw/Workspace/llvm-project/build/bin:$PATH
 
 # {{{2 macOS
 export BASH_SILENCE_DEPRECATION_WARNING=1
