@@ -4,12 +4,14 @@
 #
 # {{{3 Locale and Color
 export LANG='en_US.UTF-8'
-if [[ -n "$TMUX" ]]; then
-  # tmux + vim do not work well without this setting.
-  export TERM='screen-256color'
-else
-  export TERM='xterm-256color'
-fi
+# change to test on freebsd
+# if [[ -n "$TMUX" ]]; then
+#   # tmux + vim do not work well without this setting.
+#   export TERM='screen-256color'
+# else
+#   export TERM='xterm-256color'
+# fi
+export TERM='xterm-256color'
 
 # {{{3 PS1
 function prompt_command {
@@ -85,7 +87,9 @@ alias gg='git log --graph --oneline --all'
 alias gpa='~/Workspace/dotfiles/bin/sync_git_repo'
 
 # {{{2 Tmux.
-alias tmux="TERM=screen-256color-bce tmux -2"
+# change to test on freebsd
+# alias tmux="TERM=screen-256color-bce tmux -2"
+alias tmux="tmux -2"
 alias tad='tmux attach -t 0 -d'
 alias ta1='tmux attach -t 1 -d'
 alias ta2='tmux attach -t 2 -d'
