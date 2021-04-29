@@ -5,7 +5,9 @@
 - Compile:
 
         mkdir -p ~/Workspace
-        cd ~/Workspace/dotfiles
+        cd ~/Workspace
+        git clone git@github.com:xiejw/dotfiles.git
+        cd dotfiles
         CC=clang make
 
 ## Bashrc
