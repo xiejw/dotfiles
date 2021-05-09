@@ -28,7 +28,7 @@ int main() {
         "~/Workspace/dockerfiles",
         "~/Workspace/notes",
         "~/Workspace/eva",
-        "~/Workspace/games",
+        // "~/Workspace/games",
         "~/Workspace/mlvm",
         /* clang-format on */
     };
