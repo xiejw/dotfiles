@@ -16,7 +16,7 @@ Append the following block at the end of `~/.profile`.
 
     # Customized
     export DOTFILES=~/Workspace/dotfiles
-    source ~/Workspace/dotfiles/conf/bashrc
+    source ~/Workspace/dotfiles/conf/bash_profile
 
 ## Tmux
 
