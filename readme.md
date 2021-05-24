@@ -40,3 +40,17 @@ Link the file:
 - See [manpage](https://xmonad.org/manpage.html) for default key bindings.
 - See [here](doc/xmonad_cheatsheet.md) for layout cheatsheet.
 
+## Clang/LLVM
+
+To compile llvm
+
+```
+mkdir build
+cd build
+cmake -G Ninja -DCMAKE_BUILD_TYPE=Release \
+        -DLLVM_ENABLE_PROJECTS='clang;clang-format;lld;compiler-rt' \
+        -DLLVM_ENABLE_ASSERTIONS=NO \
+        -DLLVM_ENABLE_THREADS=NO \
+        ../llvm/
+```
+where compiler-rt is needed for asan.
