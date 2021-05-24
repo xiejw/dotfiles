@@ -45,6 +45,8 @@ Link the file:
 To compile llvm
 
 ```
+git clone https://github.com/llvm/llvm-project.git
+cd llvm-project
 mkdir build
 cd build
 cmake -G Ninja -DCMAKE_BUILD_TYPE=Release \
