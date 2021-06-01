@@ -1,19 +1,14 @@
 # vim: ft=sh:foldlevel=2:foldenable:foldmethod=marker
 
-# {{{1 System Configurations
+# ------------------------------------------------------------------------------
+# System Configurations
+# ------------------------------------------------------------------------------
 #
-# {{{3 Locale and Color
+# Locale and Color
 export LANG='en_US.UTF-8'
-# change to test on freebsd
-# if [[ -n "$TMUX" ]]; then
-#   # tmux + vim do not work well without this setting.
-#   export TERM='screen-256color'
-# else
-#   export TERM='xterm-256color'
-# fi
 export TERM='xterm-256color'
 
-# {{{3 PS1
+# PS1
 function prompt_command {
   export PS1="\n[\[\033[1;34m\]\w]\[\033[0m\]\n\[\033[1;${PROMPT_COMMAND_COLOR}m\]\u:\h\[\033[1;33m\] $(${DOTFILES}/bin/prompt)-> \[\033[0m\]"
 }
@@ -32,7 +27,8 @@ fi
 export PROMPT_COMMAND=prompt_command
 export EDITOR=vim
 
-# {{{3 Keyboard
+# Keyboard
+#
 # This disable the cap lock.
 unameOut="$(uname -s)"
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
@@ -112,10 +108,11 @@ else
   alias mtv='make VERBOSE=1 test'
 fi
 
-# {{{2 Vim.
+# Vim.
 alias v='vim'
 
-# short cut for ~/Workspace
+# Shortcut for ~/Workspace
+#
 function w {
   if [[ $# -eq 1 ]]; then
    cd ~/Workspace/$1
@@ -131,8 +128,9 @@ export CXX=clang++
 # include. man xcrun and search for SDKROOT.
 if [[ "$OSTYPE" == "darwin"* ]]; then
         export SDKROOT=`xcrun --sdk macosx --show-sdk-path`
-        export PATH=/Users/xiejw/Workspace/llvm-project/build/bin:$PATH
 fi
+# Use local clang/llvm if possible. Good for ASAN check on macOS.
+export PATH=/Users/xiejw/Workspace/llvm-project/build/bin:$PATH
 
 # {{{2 macOS
 export BASH_SILENCE_DEPRECATION_WARNING=1
@@ -144,9 +142,7 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 # 4. no build folder
 export FZF_DEFAULT_COMMAND='find . -type f -not -path "./target/*" -not -path "*/\.*" -not -path "./bin/*" -not -path "./build/*"'
 
-# experimental.
+# Experimental.
 # put local brew path into PATH.
 export PATH=~/Workspace/homebrew/bin:$PATH
-# put local llvm bins into PATH, e.g., clang-format on FreeBSD
-export PATH=$PATH:/llvm/build/bin/
 
