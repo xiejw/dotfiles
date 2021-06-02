@@ -130,7 +130,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
         export SDKROOT=`xcrun --sdk macosx --show-sdk-path`
 fi
 # Use local clang/llvm if possible. Good for ASAN check on macOS.
-export PATH=/Users/xiejw/Workspace/llvm-project/build/bin:$PATH
+export PATH=$HOME/Workspace/llvm-project/build/bin:$PATH
 
 # {{{2 macOS
 export BASH_SILENCE_DEPRECATION_WARNING=1
