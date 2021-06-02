@@ -53,6 +53,9 @@ cmake -G Ninja -DCMAKE_BUILD_TYPE=Release \
         -DLLVM_ENABLE_PROJECTS='clang;clang-format;lld;compiler-rt' \
         -DLLVM_ENABLE_ASSERTIONS=NO \
         -DLLVM_ENABLE_THREADS=NO \
+        -DLLVM_TARGETS_TO_BUILD="X86" \
+        -DLLVM_USE_NEWPM=ON \
+        -DLLVM_USE_LINKER=lld \
         ../llvm/
 ```
 where compiler-rt is needed for asan.
