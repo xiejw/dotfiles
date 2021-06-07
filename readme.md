@@ -58,4 +58,4 @@ cmake -G Ninja -DCMAKE_BUILD_TYPE=Release \
         -DLLVM_USE_LINKER=lld \
         ../llvm/
 ```
-where compiler-rt is needed for asan.
+where compiler-rt is needed for asan. Install `cmake ninja` ahead of time.
