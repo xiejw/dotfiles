@@ -28,8 +28,10 @@ int main() {
         "~/Workspace/dockerfiles",
         "~/Workspace/notes",
         "~/Workspace/eva",
-        // "~/Workspace/games",
         "~/Workspace/mlvm",
+        // "~/Workspace/games",
+        "~/Workspace/lunar",
+        "~/Workspace/bb",
         /* clang-format on */
     };
 
