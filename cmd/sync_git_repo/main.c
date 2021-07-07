@@ -23,14 +23,21 @@ int main() {
     // ----------------------------------------
     char* repos[] = {
         /* clang-format off */
+
+        // core
         "~/Workspace/vimrc",
         "~/Workspace/dotfiles",
         "~/Workspace/dockerfiles",
         "~/Workspace/notes",
+        // "~/Workspace/games",
+
+        // c
         "~/Workspace/eva",
         "~/Workspace/mlvm",
-        // "~/Workspace/games",
+
+        // go
         "~/Workspace/lunar",
+        "~/Workspace/fsx",
         "~/Workspace/bb",
         /* clang-format on */
     };
