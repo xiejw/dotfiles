@@ -27,8 +27,8 @@ int main() {
         // core
         "~/Workspace/vimrc",
         "~/Workspace/dotfiles",
-        "~/Workspace/dockerfiles",
         "~/Workspace/notes",
+        // "~/Workspace/dockerfiles",
         // "~/Workspace/games",
 
         // c
