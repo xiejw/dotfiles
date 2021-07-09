@@ -28,6 +28,7 @@ int main() {
         "~/Workspace/vimrc",
         "~/Workspace/dotfiles",
         "~/Workspace/notes",
+        "~/Workspace/algorithms",
         // "~/Workspace/dockerfiles",
         // "~/Workspace/games",
 
